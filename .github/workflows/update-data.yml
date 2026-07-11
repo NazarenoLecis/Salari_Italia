@@ -1,0 +1,35 @@
+name: update data
+
+on:
+  schedule:
+    - cron: "0 4 1 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: python -m pip install --upgrade pip
+      - run: pip install -e .
+      - run: python scripts/run_pipeline.py
+      - name: Commit processed data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f data/processed/salari_eurostat.csv
+          git add -f data/processed/salari_eurostat.json
+          git add -f data/validation/pipeline_report.json
+          if git diff --cached --quiet; then
+            echo "Nessun aggiornamento dei dati"
+          else
+            git commit -m "Update salary datasets"
+            git push
+          fi
