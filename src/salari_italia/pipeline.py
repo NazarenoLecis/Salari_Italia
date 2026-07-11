@@ -61,8 +61,10 @@ def run_pipeline(
     output = ensure_standard_schema(pd.concat([observed, derived], ignore_index=True))
 
     csv_path = PROCESSED_DIR / "salari_eurostat.csv"
+    json_path = PROCESSED_DIR / "salari_eurostat.json"
     parquet_path = PROCESSED_DIR / "salari_eurostat.parquet"
     output.to_csv(csv_path, index=False)
+    output.to_json(json_path, orient="records", force_ascii=False)
     output.to_parquet(parquet_path, index=False)
 
     validation = validate_dataset(output)
@@ -74,9 +76,11 @@ def run_pipeline(
         "failed_requests": len(errors),
         "errors": errors,
         "validation": validation,
-        "outputs": {"csv": str(csv_path), "parquet": str(parquet_path)},
+        "outputs": {"csv": str(csv_path), "json": str(json_path), "parquet": str(parquet_path)},
     }
-    (VALIDATION_DIR / "pipeline_report.json").write_text(
-        json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8"
-    )
+    report_path = VALIDATION_DIR / "pipeline_report.json"
+    report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    if not frames:
+        raise RuntimeError(f"Nessuna fonte ha restituito dati. Dettagli in {report_path}.")
     return output, report
