@@ -1,0 +1,52 @@
+# Fonti
+
+## Fonti implementate
+
+### Eurostat Structure of Earnings Survey
+
+`earn_ses_hourly` contiene statistiche sulle retribuzioni orarie lorde. La pipeline acquisisce D1, mediana e D9 per il totale e la mediana per sesso, età, professione, settore e regime di orario quando le celle sono pubblicate.
+
+La SES è quadriennale e riguarda il perimetro definito nei metadati Eurostat. La copertura non coincide necessariamente con l'intera occupazione e può escludere imprese molto piccole o specifici settori.
+
+### Eurostat low-wage earners
+
+`earn_ses_pub1s` misura la quota di dipendenti con retribuzione oraria lorda inferiore a due terzi della mediana nazionale. La soglia è relativa alla distribuzione del singolo paese.
+
+### Eurostat gender pay gap
+
+`earn_gr_gpgr2` misura il divario retributivo di genere non corretto. Il dato non controlla per professione, settore, anzianità, istruzione, orario o altre caratteristiche.
+
+### Eurostat labour cost levels
+
+`lc_lci_lev` riporta livelli del costo orario del lavoro. Il costo del lavoro non coincide con la retribuzione lorda ricevuta dal dipendente.
+
+## Fonti italiane da collegare
+
+### ISTAT
+
+Il modulo ISTAT dovrà individuare e mappare le tavole pubbliche che coprono retribuzioni, struttura dell'occupazione, professione, titolo di studio e territorio. Prima dell'integrazione devono essere verificati endpoint SDMX, frequenza, popolazione, classificazioni e disponibilità degli incroci.
+
+Stato: `da_mappare`.
+
+### INPS
+
+Gli osservatori amministrativi INPS possono coprire retribuzioni imponibili e giornate lavorate per categorie di dipendenti, territorio, sesso, età, qualifica e caratteristiche del rapporto. Ogni archivio ha un proprio perimetro contributivo e non descrive automaticamente tutti i lavoratori.
+
+Stato: `da_mappare`.
+
+### MEF, dichiarazioni fiscali
+
+Le statistiche sulle dichiarazioni possono aggiungere redditi da lavoro dipendente e assimilati per comune di residenza. La variabile è fiscale, annuale e riferita ai contribuenti. Non identifica direttamente professione, luogo di lavoro o salario orario.
+
+Stato: `da_mappare`.
+
+## Fonti complementari
+
+Le fonti seguenti possono essere usate per pannelli specifici senza sostituire le statistiche generali sui salari:
+
+- ARAN e Conto annuale RGS per il pubblico impiego;
+- AlmaLaurea per gli esiti occupazionali dei laureati;
+- Eurostat EU-SILC per redditi individuali e familiari;
+- Labour Force Survey per caratteristiche dell'occupazione, quando la variabile retributiva e la granularità sono adeguate.
+
+Ogni integrazione deve indicare se il dato riguarda persone, rapporti di lavoro, contribuenti, imprese o famiglie.
