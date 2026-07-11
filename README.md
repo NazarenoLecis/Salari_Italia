@@ -31,7 +31,7 @@ scripts/                 esecuzione delle fasi operative
 dashboard/               applicazione Streamlit
 docs/                    metodologia, fonti e dizionario dati
 tests/                   test automatici
-data/                     dati locali esclusi da Git
+data/                     dati e controlli generati dalla pipeline
 ```
 
 ## Installazione
@@ -55,7 +55,14 @@ Per modificare i paesi scaricati:
 SALARI_GEOGRAPHIES=IT,DE,FR,ES,NL,EU27_2020 python scripts/run_pipeline.py
 ```
 
-Gli output principali vengono salvati in `data/processed/salari_eurostat.parquet` e `data/processed/salari_eurostat.csv`. I file generati non vengono versionati.
+Gli output vengono salvati in:
+
+- `data/processed/salari_eurostat.csv`;
+- `data/processed/salari_eurostat.json`;
+- `data/processed/salari_eurostat.parquet`;
+- `data/validation/pipeline_report.json`.
+
+Il workflow `update-data.yml` esegue la pipeline il primo giorno di ogni mese alle 04:00 UTC e può essere avviato manualmente. CSV, JSON e rapporto di validazione vengono aggiornati su `main`; raw, file intermedi e Parquet restano fuori da Git.
 
 ## Schema dati
 
