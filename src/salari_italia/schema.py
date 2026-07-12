@@ -30,6 +30,8 @@ STANDARD_COLUMNS = [
     "working_time_label",
     "seniority",
     "seniority_label",
+    "paid_days",
+    "paid_days_label",
     "sector",
     "sector_label",
     "firm_size",

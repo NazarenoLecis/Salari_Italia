@@ -11,6 +11,7 @@ from salari_italia.config import (
     EUROSTAT_REQUESTS,
     ISTAT_REQUESTS,
     ISTAT_STRUCTURE_FLOW_ID,
+    OECD_REQUESTS,
     PROCESSED_DIR,
     RAW_DIR,
     VALIDATION_DIR,
@@ -22,6 +23,7 @@ from salari_italia.eurostat import download_dataset, jsonstat_to_frame
 from salari_italia.harmonise import harmonise_eurostat
 from salari_italia.indicators import build_percentile_ratios
 from salari_italia.istat import download_istat_csv, download_istat_series, download_istat_structure, harmonise_istat, use_raw_cache
+from salari_italia.oecd import download_oecd_dataset, harmonise_oecd_average_wages
 from salari_italia.schema import empty_standard_frame, ensure_standard_schema
 from salari_italia.validation import validate_dataset
 
@@ -67,6 +69,7 @@ def run_pipeline(
     geographies: tuple[str, ...] | None = None,
     requests_config: Iterable[dict[str, Any]] = EUROSTAT_REQUESTS,
     istat_requests_config: Iterable[dict[str, Any]] = ISTAT_REQUESTS,
+    oecd_requests_config: Iterable[dict[str, Any]] = OECD_REQUESTS,
     fail_on_errors: bool = True,
 ) -> tuple[pd.DataFrame, dict[str, Any]]:
     ensure_data_directories()
@@ -97,6 +100,25 @@ def run_pipeline(
                 source_url=source_url,
                 download_timestamp=payload.get("updated"),
             )
+            frames.append(frame)
+        except Exception as exc:
+            errors.append({"request": name, "dataset": dataset_id, "error": str(exc)})
+
+    oecd_frames: list[pd.DataFrame] = []
+    for request_config in oecd_requests_config:
+        name = str(request_config["name"])
+        dataset_id = str(request_config["dataset_id"])
+        raw_path = RAW_DIR / f"{name}.csv"
+        try:
+            raw, source_url = download_oecd_dataset(
+                dataset_id=dataset_id,
+                start_period=str(request_config.get("start_period") or ""),
+                raw_output_path=raw_path,
+            )
+            if raw.empty:
+                raise RuntimeError("La risposta OECD non contiene osservazioni.")
+            frame = harmonise_oecd_average_wages(raw=raw, request_name=name, source_url=source_url)
+            oecd_frames.append(frame)
             frames.append(frame)
         except Exception as exc:
             errors.append({"request": name, "dataset": dataset_id, "error": str(exc)})
@@ -175,8 +197,9 @@ def run_pipeline(
         "geographies": list(selected_geographies),
         "successful_requests": len(frames),
         "failed_requests": len(errors),
-        "successful_eurostat_requests": len(frames) - len(istat_frames),
+        "successful_eurostat_requests": len(frames) - len(istat_frames) - len(oecd_frames),
         "successful_istat_requests": len(istat_frames),
+        "successful_oecd_requests": len(oecd_frames),
         "errors": errors,
         "warnings": warnings,
         "validation": validation,

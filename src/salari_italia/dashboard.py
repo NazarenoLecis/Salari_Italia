@@ -7,7 +7,7 @@ from typing import Any, Iterable
 
 import pandas as pd
 
-from salari_italia.config import EUROSTAT_REQUESTS, ISTAT_REQUESTS
+from salari_italia.config import EUROSTAT_REQUESTS, ISTAT_REQUESTS, OECD_REQUESTS
 from salari_italia.eurostat import readable_request_url
 from salari_italia.schema import ensure_standard_schema
 
@@ -39,6 +39,8 @@ DASHBOARD_FIELDS = [
     "working_time_label",
     "seniority",
     "seniority_label",
+    "paid_days",
+    "paid_days_label",
     "sector",
     "sector_label",
     "firm_size",
@@ -74,6 +76,7 @@ COMPACT_RECORD_FIELDS = [
     "contract_type",
     "working_time",
     "seniority",
+    "paid_days",
     "sector",
     "firm_size",
     "public_private",
@@ -105,6 +108,7 @@ FILTER_DIMENSIONS = [
     {"id": "working_time", "field": "working_time", "label": "Orario", "label_field": "working_time_label"},
     {"id": "firm_size", "field": "firm_size", "label": "Dimensione impresa", "label_field": "firm_size_label"},
     {"id": "seniority", "field": "seniority", "label": "Anzianita'", "label_field": "seniority_label"},
+    {"id": "paid_days", "field": "paid_days", "label": "Giornate retribuite", "label_field": "paid_days_label"},
     {"id": "contract_type", "field": "contract_type", "label": "Contratto", "label_field": "contract_type_label"},
     {"id": "public_private", "field": "public_private", "label": "Pubblico/privato"},
     {"id": "citizenship", "field": "citizenship", "label": "Cittadinanza", "label_field": "citizenship_label"},
@@ -124,7 +128,7 @@ COVERAGE_ITEMS = [
         "dimension": "Distribuzione complessiva dei salari",
         "status": "partial",
         "source": "ISTAT RACLI; Eurostat Structure of Earnings Survey",
-        "note": "Le fonti pubbliche aggregate espongono primo decile, mediana, nono decile e media: non microdati o istogrammi completi.",
+        "note": "Le API pubbliche aggregate espongono primo decile, mediana, nono decile e media. La dashboard non ricostruisce una distribuzione piena senza classi o frequenze ufficiali.",
     },
     {
         "dimension": "Sesso, eta', professione, settore, orario",
@@ -142,13 +146,13 @@ COVERAGE_ITEMS = [
         "dimension": "Regione, provincia, citta' o comune",
         "status": "partial",
         "source": "ISTAT RACLI, settore privato",
-        "note": "Sono integrate aree provinciali pubblicate da ISTAT RACLI; comuni e luogo di residenza non sono stimati.",
+        "note": "Sono integrate regioni e aree provinciali pubblicate da ISTAT RACLI; comuni e luogo di residenza non sono stimati.",
     },
     {
-        "dimension": "Province, paese di nascita, orario, qualifica e settori Ateco dettagliati",
+        "dimension": "Province, paese di nascita, orario, qualifica, giornate retribuite e settori Ateco dettagliati",
         "status": "available",
         "source": "ISTAT RACLI, settore privato",
-        "note": "Disponibile per retribuzioni orarie dei dipendenti del settore privato dal 2014, secondo celle pubblicate.",
+        "note": "Disponibile per retribuzioni orarie dei dipendenti del settore privato dal 2014, secondo celle pubblicate. Le giornate retribuite sono classi ufficiali, non conteggi individuali ricostruiti.",
     },
     {
         "dimension": "Pubblico/privato, dipendenti/autonomi, cittadinanza",
@@ -277,6 +281,15 @@ def source_catalog(geographies: tuple[str, ...]) -> list[dict[str, Any]]:
                 "dataset_id": request_config["flow_id"],
                 "description": request_config.get("description"),
                 "url": f"https://esploradati.istat.it/SDMXWS/rest/data/{request_config['flow_id']}",
+            }
+        )
+    for request_config in OECD_REQUESTS:
+        catalog.append(
+            {
+                "name": request_config["name"],
+                "dataset_id": request_config["dataset_id"],
+                "description": request_config.get("description"),
+                "url": f"https://sdmx.oecd.org/public/rest/data/{request_config['dataset_id']}/.",
             }
         )
     return catalog

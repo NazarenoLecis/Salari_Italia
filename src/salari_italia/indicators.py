@@ -67,6 +67,8 @@ def build_percentile_ratios(df: pd.DataFrame) -> pd.DataFrame:
         "working_time_label",
         "seniority",
         "seniority_label",
+        "paid_days",
+        "paid_days_label",
         "sector",
         "sector_label",
         "firm_size",

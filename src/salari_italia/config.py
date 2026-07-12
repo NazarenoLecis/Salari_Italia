@@ -13,6 +13,24 @@ VALIDATION_DIR = DATA_DIR / "validation"
 DEFAULT_GEOGRAPHIES = ("IT", "DE", "FR", "ES", "NL", "EU27_2020")
 
 EUROSTAT_BASE_URL = "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data"
+OECD_BASE_URL = "https://sdmx.oecd.org/public/rest/data"
+
+OECD_REQUESTS = (
+    {
+        "name": "oecd_average_annual_wages",
+        "dataset_id": "OECD.ELS.SAE,DSD_EARNINGS@AV_AN_WAGE",
+        "description": "Salario medio annuo per dipendente equivalente full-time nell'economia totale, dollari PPP.",
+        "filters": {
+            "MEASURE": "WG",
+            "UNIT_MEASURE": "USD_PPP",
+            "PAY_PERIOD": "A",
+            "PRICE_BASE": "Q",
+            "AGGREGATION_OPERATION": "MEAN",
+            "SEX": "_Z",
+        },
+        "start_period": "2000",
+    },
+)
 
 EUROSTAT_REQUESTS = (
     {
@@ -254,6 +272,13 @@ ISTAT_REQUESTS = (
         "name": "istat_racli_sector_qualification",
         "flow_id": "533_957_DF_DCSC_RACLI_24",
         "description": "Retribuzione oraria dei dipendenti privati per qualifica contrattuale e settore Ateco a due cifre.",
+        "dimensions": {"DATA_TYPE": ISTAT_WAGE_DATA_TYPES, "REF_AREA": ("IT",)},
+        "start_period": "2014",
+    },
+    {
+        "name": "istat_racli_sector_paid_days",
+        "flow_id": "533_957_DF_DCSC_RACLI_25",
+        "description": "Retribuzione oraria dei dipendenti privati per giornate retribuite e settore Ateco a due cifre.",
         "dimensions": {"DATA_TYPE": ISTAT_WAGE_DATA_TYPES, "REF_AREA": ("IT",)},
         "start_period": "2014",
     },

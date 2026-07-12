@@ -98,6 +98,8 @@ LOCAL_LABELS_IT = {
     "PAID_DAYS": {
         "TOTAL": "Totale",
         "D0-364": "0-364 giorni",
+        "D_UN90": "Fino a 90 giornate retribuite",
+        "D_GE91": "91 giornate retribuite e oltre",
         "D1-3": "1-3 giorni",
         "D4-30": "4-30 giorni",
         "D31-60": "31-60 giorni",
@@ -262,7 +264,7 @@ def download_istat_series(
         return pd.DataFrame(rows), source_url, dbnomics_codelists(dataset)
 
     offset = 0
-    limit = 1000
+    limit = 250
     docs: list[dict[str, Any]] = []
     dataset: dict[str, Any] = {}
     source_url = url
@@ -427,6 +429,8 @@ def harmonise_istat(
                 "working_time_label": label_for(codelists, "FULL_PART_TIME", row.get("FULL_PART_TIME")),
                 "seniority": row.get("EMPLOYEE_TENURE"),
                 "seniority_label": label_for(codelists, "EMPLOYEE_TENURE", row.get("EMPLOYEE_TENURE")),
+                "paid_days": row.get("PAID_DAYS"),
+                "paid_days_label": label_for(codelists, "PAID_DAYS", row.get("PAID_DAYS")),
                 "sector": sector,
                 "sector_label": label_for(codelists, "ECON_ACTIVITY_NACE_2007", sector),
                 "firm_size": row.get("EMPLOYESS_CLASS"),
