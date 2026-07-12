@@ -4,13 +4,19 @@
 
 ### Eurostat Structure of Earnings Survey
 
-`earn_ses_hourly` contiene statistiche sulle retribuzioni orarie lorde. La pipeline acquisisce D1, mediana e D9 per il totale e la mediana per sesso, età, professione, settore e regime di orario quando le celle sono pubblicate.
+`earn_ses_hourly` contiene statistiche sulle retribuzioni orarie lorde. La pipeline acquisisce media, D1, mediana e D9 per il totale e media/mediana per sesso, età, professione, settore e regime di orario quando le celle sono pubblicate.
+
+`earn_ses_monthly` e `earn_ses_annual` aggiungono gli stessi indicatori distributivi per retribuzioni mensili e annuali lorde. Non vengono convertite tra loro: ogni periodo retributivo resta una misura distinta.
+
+Le tavole `earn_ses22_15`, `earn_ses22_16`, `earn_ses22_17`, `earn_ses22_18`, `earn_ses22_22`, `earn_ses22_23`, `earn_ses22_28`, `earn_ses22_29` e `earn_ses22_30` coprono l'edizione 2022 della SES e sono usate per contratto, istruzione, anzianità lavorativa, dimensione d'impresa, professione, età e settore. Sono trattate come punti 2022, non come serie storiche.
 
 La SES è quadriennale e riguarda il perimetro definito nei metadati Eurostat. La copertura non coincide necessariamente con l'intera occupazione e può escludere imprese molto piccole o specifici settori.
 
 ### Eurostat low-wage earners
 
 `earn_ses_pub1s` misura la quota di dipendenti con retribuzione oraria lorda inferiore a due terzi della mediana nazionale. La soglia è relativa alla distribuzione del singolo paese.
+
+`earn_ses_pub1a` e `earn_ses_pub1i` estendono la stessa misura per classe di età e titolo di studio.
 
 ### Eurostat gender pay gap
 

@@ -26,6 +26,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -f data/processed/salari_eurostat.csv
           git add -f data/processed/salari_eurostat.json
+          git add -f data/processed/salari_dashboard.json
           git add -f data/validation/pipeline_report.json
           if git diff --cached --quiet; then
             echo "Nessun aggiornamento dei dati"

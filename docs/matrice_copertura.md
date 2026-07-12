@@ -2,23 +2,30 @@
 
 | Dimensione | Eurostat SES | Altre fonti | Stato nel repository |
 |---|---:|---|---|
-| D1, mediana e D9 | Sì | INPS o microdati per maggiore dettaglio | Implementato |
+| Media, D1, mediana e D9 | Sì, orario/mensile/annuale | INPS o microdati per maggiore dettaglio | Implementato |
 | Sesso | Sì | ISTAT, INPS | Implementato per Eurostat |
 | Età | Sì | ISTAT, INPS | Implementato per Eurostat |
 | Professione | Sì, ISCO | ISTAT | Implementato per Eurostat |
 | Settore economico | Sì, NACE | ISTAT, INPS | Implementato per Eurostat |
 | Tempo pieno e part-time | Sì | ISTAT, INPS | Implementato per Eurostat |
-| Dimensione d'impresa | Parziale secondo la tavola | ISTAT, INPS | Da estendere |
-| Titolo di studio | Non nella richiesta iniziale | ISTAT, EU-SILC o microdati SES | Da mappare |
-| Qualifica contrattuale | No | INPS, contratti collettivi | Da mappare |
-| Tempo determinato/indeterminato | Non nella richiesta iniziale | ISTAT, INPS | Da mappare |
+| Dimensione d'impresa | Sì, tavole SES 2022 | ISTAT, INPS | Implementato per Eurostat 2022 |
+| Titolo di studio | Sì, tavole SES 2022 e quota low-wage | ISTAT, EU-SILC o microdati SES | Implementato per Eurostat 2022 |
+| Anzianità lavorativa | Sì, tavole SES 2022 | ISTAT, INPS | Implementato per Eurostat 2022 |
+| Qualifica contrattuale | No; disponibile solo proxy professione/manuale-non manuale in alcune tavole | INPS, contratti collettivi | Da mappare |
+| Tempo determinato/indeterminato | Sì, tavole SES 2022 `emp_cont` | ISTAT, INPS | Implementato per Eurostat 2022 |
 | Pubblico/privato | Non separato nelle richieste iniziali | RGS, ARAN, INPS, ISTAT | Da mappare |
 | Regione | No nella tavola europea acquisita | ISTAT, INPS, MEF | Da mappare |
 | Provincia | No | INPS, MEF, eventuali tavole ISTAT | Da mappare |
 | Comune | No | MEF per residenza fiscale | Da mappare con limiti |
 | Salario orario | Sì | ISTAT | Implementato |
-| Retribuzione annuale | No nella prima pipeline | INPS, ISTAT, MEF | Da mappare |
+| Retribuzione mensile | Sì | ISTAT, INPS, MEF | Implementato per Eurostat |
+| Retribuzione annuale | Sì | INPS, ISTAT, MEF | Implementato per Eurostat |
+| Retribuzione netta | No nelle tavole integrate | MEF, Eurostat net earnings per casi tipo | Non stimata |
+| Reddito dichiarato | No | MEF dichiarazioni fiscali | Da mappare separatamente |
+| Imponibile contributivo | No | INPS | Da mappare separatamente |
 | Costo del lavoro | Sì | ISTAT | Implementato |
 | Gender pay gap | Sì, non corretto | Elaborazioni su microdati | Implementato |
+| Dipendenti e autonomi | SES riguarda dipendenti | INPS, ISTAT, MEF | Da mappare senza mescolare perimetri |
+| Cittadinanza/nazionalità | No nelle tavole integrate | ISTAT, INPS | Da mappare |
 
 Una cella indicata come implementata significa che il codice di acquisizione e armonizzazione è presente. La disponibilità effettiva dipende dalle osservazioni pubblicate dalla fonte per paese e anno.

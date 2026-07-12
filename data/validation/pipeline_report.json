@@ -1,0 +1,78 @@
+{
+  "started_at": "2026-07-12T20:27:27.657918+00:00",
+  "completed_at": "2026-07-12T20:27:34.197919+00:00",
+  "geographies": [
+    "IT",
+    "DE",
+    "FR",
+    "ES",
+    "NL",
+    "EU27_2020"
+  ],
+  "successful_requests": 21,
+  "failed_requests": 0,
+  "errors": [],
+  "validation": {
+    "rows": 10758,
+    "columns": 46,
+    "missing_required_columns": [],
+    "invalid_value_count": 0,
+    "duplicate_count": 1440,
+    "year_min": 2002,
+    "year_max": 2025,
+    "datasets": [
+      "earn_gr_gpgr2",
+      "earn_ses22_15",
+      "earn_ses22_16",
+      "earn_ses22_17",
+      "earn_ses22_18",
+      "earn_ses22_22",
+      "earn_ses22_23",
+      "earn_ses22_28",
+      "earn_ses22_29",
+      "earn_ses22_30",
+      "earn_ses_annual",
+      "earn_ses_hourly",
+      "earn_ses_monthly",
+      "earn_ses_pub1a",
+      "earn_ses_pub1i",
+      "earn_ses_pub1s",
+      "lc_lci_lev"
+    ],
+    "geographies": [
+      "DE",
+      "ES",
+      "EU27_2020",
+      "FR",
+      "IT",
+      "NL"
+    ],
+    "valid": true
+  },
+  "outputs": {
+    "csv": "/home/nazareno/PycharmProjects/Salari_Italia/data/processed/salari_eurostat.csv",
+    "json": "/home/nazareno/PycharmProjects/Salari_Italia/data/processed/salari_eurostat.json",
+    "parquet": "/home/nazareno/PycharmProjects/Salari_Italia/data/processed/salari_eurostat.parquet",
+    "dashboard_json": "/home/nazareno/PycharmProjects/Salari_Italia/data/processed/salari_dashboard.json"
+  },
+  "dashboard_validation": {
+    "records": 10758,
+    "filters": [
+      "age",
+      "contract_type",
+      "education",
+      "firm_size",
+      "geography",
+      "occupation",
+      "pay_period",
+      "sector",
+      "seniority",
+      "sex",
+      "statistic",
+      "working_time",
+      "year"
+    ],
+    "coverage_items": 8,
+    "valid": true
+  }
+}

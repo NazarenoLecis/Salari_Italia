@@ -20,13 +20,19 @@
 | `occupation_label` | Etichetta della professione. |
 | `employment_status` | Posizione o stato occupazionale. |
 | `contract_type` | Tipo o durata del rapporto di lavoro. |
+| `collective_pay_agreement` | Livello o tipo di accordo retributivo, quando la fonte lo pubblica. |
+| `collective_pay_agreement_label` | Etichetta dell'accordo retributivo. |
 | `working_time` | Tempo pieno, parziale o totale. |
 | `working_time_label` | Etichetta del regime di orario. |
+| `seniority` | Classe di anzianità lavorativa o di servizio. |
+| `seniority_label` | Etichetta della classe di anzianità. |
 | `sector` | Settore economico. |
 | `sector_label` | Etichetta del settore. |
 | `firm_size` | Classe dimensionale dell'impresa. |
 | `firm_size_label` | Etichetta della dimensione. |
 | `public_private` | Settore istituzionale o natura pubblica/privata. |
+| `citizenship` | Cittadinanza o nazionalità nella fonte, quando disponibile. |
+| `citizenship_label` | Etichetta della cittadinanza. |
 | `pay_concept` | Retribuzione, reddito, imponibile o costo del lavoro. |
 | `pay_period` | Ora, mese, anno o altro periodo. |
 | `statistic` | Media, mediana, percentile, quota o rapporto. |

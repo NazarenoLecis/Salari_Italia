@@ -15,7 +15,7 @@ from salari_italia.config import EUROSTAT_BASE_URL
 USER_AGENT = "Salari_Italia/0.1 (+https://github.com/NazarenoLecis/Salari_Italia)"
 
 
-def _ordered_codes(dimension: dict[str, Any]) -> list[str]:
+def ordered_codes(dimension: dict[str, Any]) -> list[str]:
     category = dimension.get("category", {})
     index = category.get("index", {})
     if isinstance(index, list):
@@ -23,12 +23,12 @@ def _ordered_codes(dimension: dict[str, Any]) -> list[str]:
     return [str(code) for code, _ in sorted(index.items(), key=lambda item: item[1])]
 
 
-def _labels(dimension: dict[str, Any]) -> dict[str, str]:
+def dimension_labels(dimension: dict[str, Any]) -> dict[str, str]:
     labels = dimension.get("category", {}).get("label", {})
     return {str(code): str(label) for code, label in labels.items()}
 
 
-def _coordinates(position: int, sizes: list[int]) -> list[int]:
+def coordinates(position: int, sizes: list[int]) -> list[int]:
     result = [0] * len(sizes)
     remainder = position
     for index in range(len(sizes) - 1, -1, -1):
@@ -47,8 +47,8 @@ def jsonstat_to_frame(payload: dict[str, Any]) -> pd.DataFrame:
     if not dimension_ids or len(dimension_ids) != len(sizes) or any(size <= 0 for size in sizes):
         return pd.DataFrame()
 
-    codes = {dimension_id: _ordered_codes(dimensions.get(dimension_id, {})) for dimension_id in dimension_ids}
-    labels = {dimension_id: _labels(dimensions.get(dimension_id, {})) for dimension_id in dimension_ids}
+    codes = {dimension_id: ordered_codes(dimensions.get(dimension_id, {})) for dimension_id in dimension_ids}
+    labels = {dimension_id: dimension_labels(dimensions.get(dimension_id, {})) for dimension_id in dimension_ids}
     raw_values = payload.get("value", {})
     raw_status = payload.get("status", {})
 
@@ -61,7 +61,7 @@ def jsonstat_to_frame(payload: dict[str, Any]) -> pd.DataFrame:
     for position, value in observations:
         if value is None:
             continue
-        coordinate = _coordinates(position, sizes)
+        coordinate = coordinates(position, sizes)
         row: dict[str, Any] = {"value": value}
         for dimension_id, dimension_position in zip(dimension_ids, coordinate, strict=True):
             dimension_codes = codes[dimension_id]
@@ -79,7 +79,7 @@ def jsonstat_to_frame(payload: dict[str, Any]) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
-def _session() -> requests.Session:
+def eurostat_session() -> requests.Session:
     retry = Retry(
         total=4,
         connect=4,
@@ -114,7 +114,7 @@ def download_dataset(
 ) -> tuple[dict[str, Any], str]:
     params = build_query_parameters(filters, geographies)
     url = f"{EUROSTAT_BASE_URL}/{dataset_id}"
-    response = _session().get(url, params=params, timeout=timeout)
+    response = eurostat_session().get(url, params=params, timeout=timeout)
     response.raise_for_status()
     payload = response.json()
     if "error" in payload:

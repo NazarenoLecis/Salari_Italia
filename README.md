@@ -17,7 +17,11 @@ Il progetto distingue sempre il concetto retributivo, il periodo di riferimento 
 La pipeline implementa le fonti Eurostat che possono essere scaricate tramite Dissemination API:
 
 - `earn_ses_hourly`: distribuzione delle retribuzioni orarie lorde della Structure of Earnings Survey;
+- `earn_ses_monthly`: distribuzione delle retribuzioni mensili lorde della Structure of Earnings Survey;
+- `earn_ses_annual`: distribuzione delle retribuzioni annuali lorde della Structure of Earnings Survey;
+- tavole `earn_ses22_*`: retribuzioni medie 2022 per istruzione, contratto, anzianità, professione, età e dimensione d'impresa;
 - `earn_ses_pub1s`: quota di lavoratori a bassa retribuzione;
+- `earn_ses_pub1a` e `earn_ses_pub1i`: quota di lavoratori a bassa retribuzione per età e istruzione;
 - `earn_gr_gpgr2`: divario retributivo di genere non corretto;
 - `lc_lci_lev`: livelli del costo orario del lavoro.
 
@@ -60,9 +64,10 @@ Gli output vengono salvati in:
 - `data/processed/salari_eurostat.csv`;
 - `data/processed/salari_eurostat.json`;
 - `data/processed/salari_eurostat.parquet`;
+- `data/processed/salari_dashboard.json`;
 - `data/validation/pipeline_report.json`.
 
-Il workflow `update-data.yml` esegue la pipeline il primo giorno di ogni mese alle 04:00 UTC e può essere avviato manualmente. CSV, JSON e rapporto di validazione vengono aggiornati su `main`; raw, file intermedi e Parquet restano fuori da Git.
+Il workflow `update-data.yml` esegue la pipeline il primo giorno di ogni mese alle 04:00 UTC e può essere avviato manualmente. CSV, JSON, payload dashboard e rapporto di validazione vengono aggiornati su `main`; raw, file intermedi e Parquet restano fuori da Git.
 
 ## Schema dati
 
