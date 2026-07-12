@@ -12,9 +12,11 @@ Il progetto distingue sempre il concetto retributivo, il periodo di riferimento 
 - distinguere territorio di residenza, luogo di lavoro e sede dell'impresa;
 - integrare fonti italiane e confronti europei mantenendo definizioni e copertura verificabili.
 
-## Stato iniziale
+## Fonti implementate
 
-La pipeline implementa le fonti Eurostat che possono essere scaricate tramite Dissemination API:
+La pipeline implementa fonti ISTAT ed Eurostat scaricabili tramite API o mirror riproducibile:
+
+- ISTAT RACLI `533_957_DF_DCSC_RACLI_*`: retribuzioni orarie lorde dei dipendenti del settore privato dal 2014, con media, primo decile, mediana e nono decile per settori Ateco, province, sesso, età, titolo di studio, paese di nascita, contratto, orario, dimensione d'impresa, qualifica e giornate retribuite quando pubblicati;
 
 - `earn_ses_hourly`: distribuzione delle retribuzioni orarie lorde della Structure of Earnings Survey;
 - `earn_ses_monthly`: distribuzione delle retribuzioni mensili lorde della Structure of Earnings Survey;
@@ -25,7 +27,7 @@ La pipeline implementa le fonti Eurostat che possono essere scaricate tramite Di
 - `earn_gr_gpgr2`: divario retributivo di genere non corretto;
 - `lc_lci_lev`: livelli del costo orario del lavoro.
 
-Le fonti ISTAT, INPS e MEF sono censite nella documentazione e verranno collegate solo dopo aver definito endpoint, classificazioni e unità statistiche comparabili.
+INPS e MEF sono censite nella documentazione e verranno collegate solo dopo aver definito endpoint, classificazioni e unità statistiche comparabili.
 
 ## Struttura
 
@@ -57,6 +59,12 @@ Per modificare i paesi scaricati:
 
 ```bash
 SALARI_GEOGRAPHIES=IT,DE,FR,ES,NL,EU27_2020 python scripts/run_pipeline.py
+```
+
+Per ripetere una run locale usando i raw già scaricati:
+
+```bash
+SALARI_USE_RAW_CACHE=1 python scripts/run_pipeline.py
 ```
 
 Gli output vengono salvati in:

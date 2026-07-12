@@ -18,6 +18,8 @@
 | `education_label` | Etichetta del titolo di studio. |
 | `occupation` | Professione secondo la classificazione della fonte. |
 | `occupation_label` | Etichetta della professione. |
+| `contractual_occupation` | Qualifica contrattuale pubblicata dalla fonte, quando distinta dalla professione. |
+| `contractual_occupation_label` | Etichetta della qualifica contrattuale. |
 | `employment_status` | Posizione o stato occupazionale. |
 | `contract_type` | Tipo o durata del rapporto di lavoro. |
 | `collective_pay_agreement` | Livello o tipo di accordo retributivo, quando la fonte lo pubblica. |
@@ -33,6 +35,8 @@
 | `public_private` | Settore istituzionale o natura pubblica/privata. |
 | `citizenship` | Cittadinanza o nazionalità nella fonte, quando disponibile. |
 | `citizenship_label` | Etichetta della cittadinanza. |
+| `country_birth` | Paese o area di nascita, quando pubblicato dalla fonte. |
+| `country_birth_label` | Etichetta del paese o area di nascita. |
 | `pay_concept` | Retribuzione, reddito, imponibile o costo del lavoro. |
 | `pay_period` | Ora, mese, anno o altro periodo. |
 | `statistic` | Media, mediana, percentile, quota o rapporto. |
@@ -47,3 +51,4 @@
 | `source_url` | URL usato per il download. |
 | `download_timestamp` | Data di acquisizione. |
 | `dimensions_json` | Dimensioni originali della cella statistica. |
+| `record_schema` | Nel payload dashboard, elenco ordinato dei campi usati per decodificare i record compatti. |

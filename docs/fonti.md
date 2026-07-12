@@ -26,13 +26,17 @@ La SES è quadriennale e riguarda il perimetro definito nei metadati Eurostat. L
 
 `lc_lci_lev` riporta livelli del costo orario del lavoro. Il costo del lavoro non coincide con la retribuzione lorda ricevuta dal dipendente.
 
-## Fonti italiane da collegare
-
 ### ISTAT
 
-Il modulo ISTAT dovrà individuare e mappare le tavole pubbliche che coprono retribuzioni, struttura dell'occupazione, professione, titolo di studio e territorio. Prima dell'integrazione devono essere verificati endpoint SDMX, frequenza, popolazione, classificazioni e disponibilità degli incroci.
+La pipeline integra ISTAT RACLI, famiglia `533_957`, "Retribuzioni orarie dei dipendenti del settore privato". I dataflow `533_957_DF_DCSC_RACLI_8`-`24` sono usati per dettaglio territoriale provinciale e settori Ateco a due cifre.
 
-Stato: `da_mappare`.
+Le misure pubbliche integrate sono retribuzione oraria lorda media, primo decile, mediana e nono decile. Non sono microdati e non consentono di ricostruire un istogramma completo della distribuzione individuale.
+
+Le dimensioni integrate includono sesso, età, titolo di studio, paese di nascita, contratto, regime orario, dimensione d'impresa, qualifica contrattuale, giornate retribuite, provincia e settore Ateco. Il perimetro è il settore privato dipendente.
+
+Stato: `implementato`.
+
+## Fonti italiane da collegare
 
 ### INPS
 

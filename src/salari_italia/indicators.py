@@ -56,6 +56,8 @@ def build_percentile_ratios(df: pd.DataFrame) -> pd.DataFrame:
         "education_label",
         "occupation",
         "occupation_label",
+        "contractual_occupation",
+        "contractual_occupation_label",
         "employment_status",
         "contract_type",
         "contract_type_label",
@@ -72,6 +74,8 @@ def build_percentile_ratios(df: pd.DataFrame) -> pd.DataFrame:
         "public_private",
         "citizenship",
         "citizenship_label",
+        "country_birth",
+        "country_birth_label",
         "unit",
         "unit_label",
     ]

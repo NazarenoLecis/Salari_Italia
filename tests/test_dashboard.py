@@ -28,6 +28,7 @@ def test_build_dashboard_payload() -> None:
         ]
     )
     payload = build_dashboard_payload(data, {"successful_requests": 1}, ("IT",))
-    assert payload["records"][0]["value"] == 15.4
+    value_index = payload["record_schema"].index("value")
+    assert payload["records"][0][value_index] == 15.4
     assert payload["filters"]["year"][0]["value"] == 2022
     assert payload["coverage"]

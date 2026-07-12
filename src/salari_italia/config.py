@@ -192,6 +192,136 @@ EUROSTAT_REQUESTS = (
     },
 )
 
+ISTAT_STRUCTURE_FLOW_ID = "533_957_DF_DCSC_RACLI_23"
+ISTAT_WAGE_DATA_TYPES = (
+    "HOUWAG_ENTEMP_AV_MI",
+    "HOUWAG_ENTEMP_FIRD_MI",
+    "HOUWAG_ENTEMP_MED_MI",
+    "HOUWAG_ENTEMP_NIND_MI",
+)
+
+ISTAT_REQUESTS = (
+    {
+        "name": "istat_racli_sector_gender",
+        "flow_id": "533_957_DF_DCSC_RACLI_17",
+        "description": "Retribuzione oraria dei dipendenti privati per sesso e settore Ateco a due cifre.",
+        "dimensions": {"DATA_TYPE": ISTAT_WAGE_DATA_TYPES, "REF_AREA": ("IT",)},
+        "start_period": "2014",
+    },
+    {
+        "name": "istat_racli_sector_age",
+        "flow_id": "533_957_DF_DCSC_RACLI_18",
+        "description": "Retribuzione oraria dei dipendenti privati per eta' e settore Ateco a due cifre.",
+        "dimensions": {"DATA_TYPE": ISTAT_WAGE_DATA_TYPES, "REF_AREA": ("IT",)},
+        "start_period": "2014",
+    },
+    {
+        "name": "istat_racli_sector_country_birth",
+        "flow_id": "533_957_DF_DCSC_RACLI_19",
+        "description": "Retribuzione oraria dei dipendenti privati per paese di nascita e settore Ateco a due cifre.",
+        "dimensions": {"DATA_TYPE": ISTAT_WAGE_DATA_TYPES, "REF_AREA": ("IT",)},
+        "start_period": "2014",
+    },
+    {
+        "name": "istat_racli_sector_education",
+        "flow_id": "533_957_DF_DCSC_RACLI_20",
+        "description": "Retribuzione oraria dei dipendenti privati per titolo di studio e settore Ateco a due cifre.",
+        "dimensions": {"DATA_TYPE": ISTAT_WAGE_DATA_TYPES, "REF_AREA": ("IT",)},
+        "start_period": "2014",
+    },
+    {
+        "name": "istat_racli_sector_contract",
+        "flow_id": "533_957_DF_DCSC_RACLI_21",
+        "description": "Retribuzione oraria dei dipendenti privati per contratto e settore Ateco a due cifre.",
+        "dimensions": {"DATA_TYPE": ISTAT_WAGE_DATA_TYPES, "REF_AREA": ("IT",)},
+        "start_period": "2014",
+    },
+    {
+        "name": "istat_racli_sector_working_time",
+        "flow_id": "533_957_DF_DCSC_RACLI_22",
+        "description": "Retribuzione oraria dei dipendenti privati per regime orario e settore Ateco a due cifre.",
+        "dimensions": {"DATA_TYPE": ISTAT_WAGE_DATA_TYPES, "REF_AREA": ("IT",)},
+        "start_period": "2014",
+    },
+    {
+        "name": "istat_racli_sector_firm_size",
+        "flow_id": "533_957_DF_DCSC_RACLI_23",
+        "description": "Retribuzione oraria dei dipendenti privati per dimensione d'impresa e settore Ateco a due cifre.",
+        "dimensions": {"DATA_TYPE": ISTAT_WAGE_DATA_TYPES, "REF_AREA": ("IT",)},
+        "start_period": "2014",
+    },
+    {
+        "name": "istat_racli_sector_qualification",
+        "flow_id": "533_957_DF_DCSC_RACLI_24",
+        "description": "Retribuzione oraria dei dipendenti privati per qualifica contrattuale e settore Ateco a due cifre.",
+        "dimensions": {"DATA_TYPE": ISTAT_WAGE_DATA_TYPES, "REF_AREA": ("IT",)},
+        "start_period": "2014",
+    },
+    {
+        "name": "istat_racli_province_gender",
+        "flow_id": "533_957_DF_DCSC_RACLI_8",
+        "description": "Retribuzione oraria dei dipendenti privati per sesso e territorio provinciale.",
+        "dimensions": {"DATA_TYPE": ISTAT_WAGE_DATA_TYPES},
+        "start_period": "2014",
+    },
+    {
+        "name": "istat_racli_province_age",
+        "flow_id": "533_957_DF_DCSC_RACLI_9",
+        "description": "Retribuzione oraria dei dipendenti privati per eta' e territorio provinciale.",
+        "dimensions": {"DATA_TYPE": ISTAT_WAGE_DATA_TYPES},
+        "start_period": "2014",
+    },
+    {
+        "name": "istat_racli_province_country_birth",
+        "flow_id": "533_957_DF_DCSC_RACLI_10",
+        "description": "Retribuzione oraria dei dipendenti privati per paese di nascita e territorio provinciale.",
+        "dimensions": {"DATA_TYPE": ISTAT_WAGE_DATA_TYPES},
+        "start_period": "2014",
+    },
+    {
+        "name": "istat_racli_province_education",
+        "flow_id": "533_957_DF_DCSC_RACLI_11",
+        "description": "Retribuzione oraria dei dipendenti privati per titolo di studio e territorio provinciale.",
+        "dimensions": {"DATA_TYPE": ISTAT_WAGE_DATA_TYPES},
+        "start_period": "2014",
+    },
+    {
+        "name": "istat_racli_province_contract",
+        "flow_id": "533_957_DF_DCSC_RACLI_12",
+        "description": "Retribuzione oraria dei dipendenti privati per contratto e territorio provinciale.",
+        "dimensions": {"DATA_TYPE": ISTAT_WAGE_DATA_TYPES},
+        "start_period": "2014",
+    },
+    {
+        "name": "istat_racli_province_working_time",
+        "flow_id": "533_957_DF_DCSC_RACLI_13",
+        "description": "Retribuzione oraria dei dipendenti privati per regime orario e territorio provinciale.",
+        "dimensions": {"DATA_TYPE": ISTAT_WAGE_DATA_TYPES},
+        "start_period": "2014",
+    },
+    {
+        "name": "istat_racli_province_firm_size",
+        "flow_id": "533_957_DF_DCSC_RACLI_14",
+        "description": "Retribuzione oraria dei dipendenti privati per dimensione d'impresa e territorio provinciale.",
+        "dimensions": {"DATA_TYPE": ISTAT_WAGE_DATA_TYPES},
+        "start_period": "2014",
+    },
+    {
+        "name": "istat_racli_province_qualification",
+        "flow_id": "533_957_DF_DCSC_RACLI_15",
+        "description": "Retribuzione oraria dei dipendenti privati per qualifica contrattuale e territorio provinciale.",
+        "dimensions": {"DATA_TYPE": ISTAT_WAGE_DATA_TYPES},
+        "start_period": "2014",
+    },
+    {
+        "name": "istat_racli_province_paid_days",
+        "flow_id": "533_957_DF_DCSC_RACLI_16",
+        "description": "Retribuzione oraria dei dipendenti privati per giornate retribuite e territorio provinciale.",
+        "dimensions": {"DATA_TYPE": ISTAT_WAGE_DATA_TYPES},
+        "start_period": "2014",
+    },
+)
+
 
 def requested_geographies() -> tuple[str, ...]:
     raw = os.getenv("SALARI_GEOGRAPHIES", "")

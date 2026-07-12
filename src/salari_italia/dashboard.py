@@ -7,7 +7,7 @@ from typing import Any, Iterable
 
 import pandas as pd
 
-from salari_italia.config import EUROSTAT_REQUESTS
+from salari_italia.config import EUROSTAT_REQUESTS, ISTAT_REQUESTS
 from salari_italia.eurostat import readable_request_url
 from salari_italia.schema import ensure_standard_schema
 
@@ -28,6 +28,8 @@ DASHBOARD_FIELDS = [
     "education_label",
     "occupation",
     "occupation_label",
+    "contractual_occupation",
+    "contractual_occupation_label",
     "employment_status",
     "contract_type",
     "contract_type_label",
@@ -44,6 +46,8 @@ DASHBOARD_FIELDS = [
     "public_private",
     "citizenship",
     "citizenship_label",
+    "country_birth",
+    "country_birth_label",
     "pay_concept",
     "pay_period",
     "statistic",
@@ -56,6 +60,34 @@ DASHBOARD_FIELDS = [
     "source_url",
 ]
 
+COMPACT_RECORD_FIELDS = [
+    "source",
+    "dataset",
+    "source_request",
+    "year",
+    "geography_code",
+    "sex",
+    "age_class",
+    "education",
+    "occupation",
+    "contractual_occupation",
+    "contract_type",
+    "working_time",
+    "seniority",
+    "sector",
+    "firm_size",
+    "public_private",
+    "citizenship",
+    "country_birth",
+    "pay_concept",
+    "pay_period",
+    "statistic",
+    "percentile",
+    "measure_code",
+    "value",
+    "unit",
+]
+
 FILTER_DIMENSIONS = [
     {"id": "year", "field": "year", "label": "Anno"},
     {"id": "geography", "field": "geography_code", "label": "Territorio", "label_field": "geography_name"},
@@ -63,6 +95,12 @@ FILTER_DIMENSIONS = [
     {"id": "age", "field": "age_class", "label": "Eta'", "label_field": "age_label"},
     {"id": "education", "field": "education", "label": "Titolo di studio", "label_field": "education_label"},
     {"id": "occupation", "field": "occupation", "label": "Professione", "label_field": "occupation_label"},
+    {
+        "id": "contractual_occupation",
+        "field": "contractual_occupation",
+        "label": "Qualifica contrattuale",
+        "label_field": "contractual_occupation_label",
+    },
     {"id": "sector", "field": "sector", "label": "Settore", "label_field": "sector_label"},
     {"id": "working_time", "field": "working_time", "label": "Orario", "label_field": "working_time_label"},
     {"id": "firm_size", "field": "firm_size", "label": "Dimensione impresa", "label_field": "firm_size_label"},
@@ -70,6 +108,7 @@ FILTER_DIMENSIONS = [
     {"id": "contract_type", "field": "contract_type", "label": "Contratto", "label_field": "contract_type_label"},
     {"id": "public_private", "field": "public_private", "label": "Pubblico/privato"},
     {"id": "citizenship", "field": "citizenship", "label": "Cittadinanza", "label_field": "citizenship_label"},
+    {"id": "country_birth", "field": "country_birth", "label": "Paese di nascita", "label_field": "country_birth_label"},
     {"id": "pay_period", "field": "pay_period", "label": "Periodo retributivo"},
     {"id": "statistic", "field": "statistic", "label": "Statistica"},
 ]
@@ -78,38 +117,44 @@ COVERAGE_ITEMS = [
     {
         "dimension": "Media, mediana, D1, D9 e rapporti D9/D1",
         "status": "available",
-        "source": "Eurostat earn_ses_hourly, earn_ses_monthly, earn_ses_annual",
-        "note": "Disponibili per retribuzioni lorde orarie, mensili e annuali nel perimetro SES.",
+        "source": "ISTAT RACLI; Eurostat SES",
+        "note": "ISTAT RACLI copre la retribuzione oraria lorda privata dal 2014; Eurostat aggiunge mensile e annuale armonizzati.",
     },
     {
         "dimension": "Distribuzione complessiva dei salari",
         "status": "partial",
-        "source": "Eurostat Structure of Earnings Survey",
-        "note": "Il payload espone punti della distribuzione pubblicati da Eurostat, non microdati o istogrammi completi.",
+        "source": "ISTAT RACLI; Eurostat Structure of Earnings Survey",
+        "note": "Le fonti pubbliche aggregate espongono primo decile, mediana, nono decile e media: non microdati o istogrammi completi.",
     },
     {
         "dimension": "Sesso, eta', professione, settore, orario",
         "status": "available",
-        "source": "Eurostat earn_ses_hourly",
-        "note": "Serie storiche quadriennali o celle pubblicate secondo disponibilita' Eurostat.",
+        "source": "ISTAT RACLI; Eurostat earn_ses_hourly",
+        "note": "ISTAT RACLI fornisce dettaglio italiano per settore, eta', sesso e orario; Eurostat resta per confronto europeo.",
     },
     {
         "dimension": "Titolo di studio, contratto, anzianita', dimensione impresa",
-        "status": "available_2022",
-        "source": "Eurostat Structure of Earnings Survey 2022",
-        "note": "Disponibili come tavole 2022 specifiche, da non leggere come serie storica continua.",
+        "status": "partial",
+        "source": "ISTAT RACLI; Eurostat Structure of Earnings Survey 2022",
+        "note": "Titolo di studio, contratto e dimensione d'impresa sono integrati per la retribuzione oraria privata ISTAT; l'anzianita' resta solo nelle tavole SES 2022 quando pubblicata.",
     },
     {
         "dimension": "Regione, provincia, citta' o comune",
-        "status": "not_available",
-        "source": "Non integrato",
-        "note": "Non pubblicato in queste tavole Eurostat armonizzate; non viene stimato artificialmente.",
+        "status": "partial",
+        "source": "ISTAT RACLI, settore privato",
+        "note": "Sono integrate aree provinciali pubblicate da ISTAT RACLI; comuni e luogo di residenza non sono stimati.",
     },
     {
-        "dimension": "Pubblico/privato, dipendenti/autonomi, cittadinanza o nazionalita'",
-        "status": "not_available",
-        "source": "Non integrato",
-        "note": "Le tavole Eurostat pubbliche integrate non contengono questa dimensione; la dashboard non la sostituisce con stime.",
+        "dimension": "Province, paese di nascita, orario, qualifica e settori Ateco dettagliati",
+        "status": "available",
+        "source": "ISTAT RACLI, settore privato",
+        "note": "Disponibile per retribuzioni orarie dei dipendenti del settore privato dal 2014, secondo celle pubblicate.",
+    },
+    {
+        "dimension": "Pubblico/privato, dipendenti/autonomi, cittadinanza",
+        "status": "partial",
+        "source": "ISTAT RACLI ed Eurostat SES",
+        "note": "ISTAT RACLI copre il settore privato e il paese di nascita; cittadinanza e autonomi non sono ancora integrati come salario comparabile.",
     },
     {
         "dimension": "Retribuzione netta",
@@ -167,13 +212,14 @@ def option_sort_key(option: dict[str, Any]) -> tuple[int, str]:
 def dimension_options(df: pd.DataFrame, field: str, label_field: str | None = None) -> list[dict[str, Any]]:
     if field not in df.columns:
         return []
-    rows = df[[field] + ([label_field] if label_field and label_field in df.columns else [])].dropna(subset=[field])
+    columns = [field] + ([label_field] if label_field and label_field in df.columns else [])
+    rows = df[columns].dropna(subset=[field]).drop_duplicates(subset=[field], keep="last")
     options: dict[Any, str] = {}
-    for _, row in rows.iterrows():
-        value = clean_scalar(row[field])
+    for row in rows.to_dict(orient="records"):
+        value = clean_scalar(row.get(field))
         if value is None:
             continue
-        label = clean_scalar(row[label_field]) if label_field and label_field in rows.columns else value
+        label = clean_scalar(row.get(label_field)) if label_field and label_field in row else value
         options[value] = str(label if label is not None else value)
     return sorted(
         [{"value": value, "label": label} for value, label in options.items()],
@@ -190,16 +236,22 @@ def build_filter_options(df: pd.DataFrame) -> dict[str, list[dict[str, Any]]]:
     return output
 
 
-def record_payload(df: pd.DataFrame) -> list[dict[str, Any]]:
-    present_fields = [field for field in DASHBOARD_FIELDS if field in df.columns]
+def record_payload(df: pd.DataFrame) -> list[list[Any]]:
+    present_fields = [field for field in COMPACT_RECORD_FIELDS if field in df.columns]
     selected = df[present_fields].copy()
+    duplicate_subset = [
+        field
+        for field in present_fields
+        if field not in {"dataset", "source_request", "measure_code"}
+    ]
+    selected = selected.drop_duplicates(subset=duplicate_subset, keep="last")
     selected = selected.sort_values(
         [field for field in ["dataset", "source_request", "geography_code", "year", "pay_period", "statistic"] if field in selected.columns]
     )
     records = []
     for row in selected.to_dict(orient="records"):
         cleaned = {key: clean_scalar(value) for key, value in row.items()}
-        records.append({key: value for key, value in cleaned.items() if value is not None})
+        records.append([cleaned.get(field) for field in COMPACT_RECORD_FIELDS])
     return records
 
 
@@ -216,6 +268,15 @@ def source_catalog(geographies: tuple[str, ...]) -> list[dict[str, Any]]:
                     dict(request_config.get("filters", {})),
                     geographies,
                 ),
+            }
+        )
+    for request_config in ISTAT_REQUESTS:
+        catalog.append(
+            {
+                "name": request_config["name"],
+                "dataset_id": request_config["flow_id"],
+                "description": request_config.get("description"),
+                "url": f"https://esploradati.istat.it/SDMXWS/rest/data/{request_config['flow_id']}",
             }
         )
     return catalog
@@ -250,7 +311,7 @@ def build_dashboard_payload(
             "public_url": "https://data.nazarenolecis.com/salari-italia/dashboard.json",
             "description": "Payload pubblico per la dashboard sui salari italiani.",
             "methodology": (
-                "Dati ufficiali Eurostat armonizzati senza stime artificiali. Retribuzioni lorde, "
+                "Dati ufficiali ISTAT ed Eurostat armonizzati senza stime artificiali. Retribuzioni lorde, "
                 "redditi dichiarati, imponibili contributivi, netti e costo del lavoro restano concetti separati."
             ),
             "pipeline_report": report or {},
@@ -259,6 +320,7 @@ def build_dashboard_payload(
         "filters": build_filter_options(standard),
         "coverage": COVERAGE_ITEMS,
         "sources": source_catalog(geographies),
+        "record_schema": COMPACT_RECORD_FIELDS,
         "records": record_payload(standard),
     }
     validate_dashboard_payload(payload)
@@ -269,13 +331,20 @@ def validate_dashboard_payload(payload: dict[str, Any]) -> dict[str, Any]:
     records = payload.get("records")
     if not isinstance(records, list) or not records:
         raise ValueError("Il payload dashboard non contiene record.")
+    schema = payload.get("record_schema")
+    if not isinstance(schema, list) or "value" not in schema or "year" not in schema or "dataset" not in schema:
+        raise ValueError("Il payload dashboard non contiene uno schema record valido.")
+    value_index = schema.index("value")
+    year_index = schema.index("year")
+    dataset_index = schema.index("dataset")
     invalid_records = [
         index
         for index, record in enumerate(records)
-        if not isinstance(record, dict)
-        or "value" not in record
-        or "year" not in record
-        or "dataset" not in record
+        if not isinstance(record, list)
+        or len(record) != len(schema)
+        or record[value_index] is None
+        or record[year_index] is None
+        or record[dataset_index] is None
     ]
     if invalid_records:
         raise ValueError(f"Record dashboard non validi: {invalid_records[:5]}")
