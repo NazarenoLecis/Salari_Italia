@@ -1,13 +1,15 @@
 from __future__ import annotations
 
 import json
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
 import pandas as pd
 
 from salari_italia.schema import ensure_standard_schema
+
+UTC = timezone.utc
 
 GPG_DECOMPOSITION_DATASET = "eurostat_gpg_decomposition_ses2022"
 GPG_DECOMPOSITION_REQUEST = "gender_pay_gap_decomposition_ses2022"

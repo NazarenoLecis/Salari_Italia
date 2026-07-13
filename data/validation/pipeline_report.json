@@ -417,11 +417,11 @@
     "csv": "/home/nazareno/PycharmProjects/Salari_Italia/data/processed/salari_eurostat.csv",
     "json": "/home/nazareno/PycharmProjects/Salari_Italia/data/processed/salari_eurostat.json",
     "parquet": "/home/nazareno/PycharmProjects/Salari_Italia/data/processed/salari_eurostat.parquet",
-    "dashboard_json": "/home/nazareno/PycharmProjects/Salari_Italia/data/processed/salari_dashboard.json",
-    "csv_json_scope": "Estratto Eurostat tracciabile; ISTAT RACLI completo nel payload dashboard compatto e nel Parquet locale."
+    "csv_json_scope": "Estratto Eurostat tracciabile; ISTAT RACLI completo nell'export JSON e nel Parquet locale.",
+    "data_json": "/home/nazareno/PycharmProjects/Salari_Italia/data/processed/salari_data.json"
   },
-  "dashboard_validation": {
-    "records": 440538,
+  "data_export_validation": {
+    "records": 399921,
     "filters": [
       "age",
       "citizenship",

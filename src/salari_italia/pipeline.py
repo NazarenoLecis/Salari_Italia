@@ -1,11 +1,13 @@
 from __future__ import annotations
 
 import json
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterable
 
 import pandas as pd
+
+UTC = timezone.utc
 
 from salari_italia.config import (
     EUROSTAT_REQUESTS,
@@ -18,7 +20,7 @@ from salari_italia.config import (
     ensure_data_directories,
     requested_geographies,
 )
-from salari_italia.dashboard import build_dashboard_payload, validate_dashboard_payload
+from salari_italia.data_export import build_data_export_payload, validate_data_export_payload
 from salari_italia.eurostat import download_dataset, jsonstat_to_frame, readable_request_url
 from salari_italia.gender_gap import load_gender_pay_gap_decomposition
 from salari_italia.harmonise import harmonise_eurostat
@@ -209,7 +211,7 @@ def run_pipeline(
     csv_path = PROCESSED_DIR / "salari_eurostat.csv"
     json_path = PROCESSED_DIR / "salari_eurostat.json"
     parquet_path = PROCESSED_DIR / "salari_eurostat.parquet"
-    dashboard_path = PROCESSED_DIR / "salari_dashboard.json"
+    data_export_path = PROCESSED_DIR / "salari_data.json"
 
     validation = validate_dataset(output)
     report = {
@@ -229,8 +231,8 @@ def run_pipeline(
             "csv": str(csv_path),
             "json": str(json_path),
             "parquet": str(parquet_path),
-            "dashboard_json": str(dashboard_path),
-            "csv_json_scope": "Estratto Eurostat tracciabile; ISTAT RACLI completo nel payload dashboard compatto e nel Parquet locale.",
+            "data_json": str(data_export_path),
+            "csv_json_scope": "Estratto Eurostat tracciabile; ISTAT RACLI completo nell'export JSON e nel Parquet locale.",
         },
     }
     report_path = VALIDATION_DIR / "pipeline_report.json"
@@ -245,13 +247,13 @@ def run_pipeline(
         write_json_atomic(report_path, report)
         raise RuntimeError(f"{len(errors)} richieste Eurostat non sono riuscite. Dettagli in {report_path}.")
 
-    dashboard_payload = build_dashboard_payload(output, report, selected_geographies)
-    report["dashboard_validation"] = validate_dashboard_payload(dashboard_payload)
-    dashboard_text = json_payload_text(dashboard_payload, pretty=False)
+    data_export_payload = build_data_export_payload(output, report, selected_geographies)
+    report["data_export_validation"] = validate_data_export_payload(data_export_payload)
+    data_export_text = json_payload_text(data_export_payload, pretty=False)
     report_text = json_payload_text(report)
 
     csv_json_output = output[output["source"].eq("Eurostat")].copy()
     write_dataframe_outputs(csv_json_output, csv_path, json_path, parquet_path, parquet_output=output)
-    write_text_atomic(dashboard_path, dashboard_text)
+    write_text_atomic(data_export_path, data_export_text)
     write_text_atomic(report_path, report_text)
     return output, report

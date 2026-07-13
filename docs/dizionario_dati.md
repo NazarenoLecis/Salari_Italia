@@ -51,4 +51,4 @@
 | `source_url` | URL usato per il download. |
 | `download_timestamp` | Data di acquisizione. |
 | `dimensions_json` | Dimensioni originali della cella statistica. |
-| `record_schema` | Nel payload dashboard, elenco ordinato dei campi usati per decodificare i record compatti. |
+| `record_schema` | Nell'export JSON, elenco ordinato dei campi usati per decodificare i record compatti. |

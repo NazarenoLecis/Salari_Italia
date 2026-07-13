@@ -1,12 +1,14 @@
 from __future__ import annotations
 
 import json
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from typing import Any
 
 import pandas as pd
 
 from salari_italia.schema import ensure_standard_schema
+
+UTC = timezone.utc
 
 SES_INDICATORS = {
     "D1_E_EUR": ("gross_earnings", "hourly", "percentile", 10.0),

@@ -1,6 +1,6 @@
 # Salari Italia
 
-Repository per costruire una base dati riproducibile e una dashboard sulla distribuzione delle retribuzioni in Italia.
+Repository per costruire una base dati riproducibile sulla distribuzione delle retribuzioni in Italia.
 
 Il progetto distingue sempre il concetto retributivo, il periodo di riferimento e la popolazione osservata. Retribuzione lorda, reddito da lavoro, imponibile contributivo, costo del lavoro e salario contrattuale non vengono trattati come misure equivalenti.
 
@@ -32,9 +32,8 @@ INPS e MEF sono censite nella documentazione e verranno collegate solo dopo aver
 ## Struttura
 
 ```text
-src/salari_italia/       codice della pipeline
+src/salari_italia/       codice della pipeline e degli export dati
 scripts/                 esecuzione delle fasi operative
-dashboard/               applicazione Streamlit
 docs/                    metodologia, fonti e dizionario dati
 tests/                   test automatici
 data/                     dati e controlli generati dalla pipeline
@@ -52,7 +51,6 @@ pip install -e ".[dev]"
 
 ```bash
 python scripts/run_pipeline.py
-streamlit run dashboard/app.py
 ```
 
 Per modificare i paesi scaricati:
@@ -74,10 +72,10 @@ Gli output vengono salvati in:
 - `data/processed/salari_eurostat.csv`;
 - `data/processed/salari_eurostat.json`;
 - `data/processed/salari_eurostat.parquet`;
-- `data/processed/salari_dashboard.json`;
+- `data/processed/salari_data.json`;
 - `data/validation/pipeline_report.json`.
 
-Il workflow `update-data.yml` esegue la pipeline il primo giorno di ogni mese alle 04:00 UTC e può essere avviato manualmente. CSV, JSON, payload dashboard e rapporto di validazione vengono aggiornati su `main`; raw, file intermedi e Parquet restano fuori da Git.
+Il workflow `update-data.yml` esegue la pipeline il primo giorno di ogni mese alle 04:00 UTC e può essere avviato manualmente. CSV, JSON esportabile e rapporto di validazione vengono aggiornati su `main`; raw, file intermedi e Parquet restano fuori da Git.
 
 ## Schema dati
 
