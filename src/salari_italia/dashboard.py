@@ -9,6 +9,7 @@ import pandas as pd
 
 from salari_italia.config import EUROSTAT_REQUESTS, ISTAT_REQUESTS, OECD_REQUESTS
 from salari_italia.eurostat import readable_request_url
+from salari_italia.gender_gap import GPG_DECOMPOSITION_PRODUCT_URL
 from salari_italia.schema import ensure_standard_schema
 
 DASHBOARD_FIELDS = [
@@ -167,6 +168,12 @@ COVERAGE_ITEMS = [
         "note": "ISTAT RACLI copre il settore privato e il paese di nascita; cittadinanza e autonomi non sono ancora integrati come salario comparabile.",
     },
     {
+        "dimension": "Gender pay gap adjusted e decomposizione",
+        "status": "available_separate",
+        "source": "Eurostat, Gender pay gaps in the European Union 2025, SES 2022",
+        "note": "Integrata la decomposizione Blinder-Oaxaca della tabella 2 Eurostat. E' un benchmark 2022, non una serie annuale: la serie annuale resta quella unadjusted.",
+    },
+    {
         "dimension": "Retribuzione netta",
         "status": "not_available",
         "source": "Non integrato",
@@ -298,6 +305,14 @@ def source_catalog(geographies: tuple[str, ...]) -> list[dict[str, Any]]:
                 "url": f"https://sdmx.oecd.org/public/rest/data/{request_config['dataset_id']}/.",
             }
         )
+    catalog.append(
+        {
+            "name": "gender_pay_gap_decomposition_ses2022",
+            "dataset_id": "KS-01-25-035",
+            "description": "Decomposizione Blinder-Oaxaca del gender pay gap su microdati SES 2022.",
+            "url": GPG_DECOMPOSITION_PRODUCT_URL,
+        }
+    )
     return catalog
 
 

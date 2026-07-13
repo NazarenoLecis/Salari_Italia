@@ -24,7 +24,7 @@
 | Reddito dichiarato | No | MEF dichiarazioni fiscali | Da mappare separatamente |
 | Imponibile contributivo | No | INPS | Da mappare separatamente |
 | Costo del lavoro | Sì | ISTAT | Implementato |
-| Gender pay gap | Sì, non corretto | Elaborazioni su microdati | Implementato |
+| Gender pay gap | Sì, non corretto; adjusted/decomposizione nella pubblicazione Eurostat SES 2022 | Elaborazioni su microdati | Implementato unadjusted annuale e adjusted/decomposizione 2022 |
 | Dipendenti e autonomi | SES riguarda dipendenti | INPS, ISTAT, MEF | Da mappare senza mescolare perimetri |
 | Cittadinanza/nazionalità | No nelle tavole integrate | ISTAT, INPS | Paese di nascita implementato per ISTAT RACLI; cittadinanza da mappare |
 

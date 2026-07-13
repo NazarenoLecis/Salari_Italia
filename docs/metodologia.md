@@ -14,6 +14,8 @@ Ogni osservazione specifica `pay_concept` e `pay_period`.
 - `labour_cost` comprende la spesa sostenuta dal datore di lavoro secondo la definizione della fonte.
 - `low_wage_earners` indica la quota sotto la soglia definita dalla Structure of Earnings Survey.
 - `gender_pay_gap_unadjusted` indica la differenza percentuale non corretta tra le retribuzioni orarie medie di uomini e donne.
+- `gender_pay_gap_adjusted` indica la componente unexplained della decomposizione Blinder-Oaxaca Eurostat su SES 2022.
+- `gender_pay_gap_decomposition` contiene le componenti della stessa decomposizione: parte spiegata complessiva e contributi di età, istruzione, occupazione, anzianità, contratto, orario, settore, dimensione, controllo dell'impresa e localizzazione.
 
 Retribuzione mensile e annuale incorporano anche differenze nelle ore, nei mesi lavorati e nella continuità occupazionale. La retribuzione oraria misura un oggetto diverso e viene mantenuta separata.
 
@@ -41,6 +43,8 @@ Quando D1, mediana e D9 sono disponibili per la stessa popolazione, la pipeline 
 - `median_d1`.
 
 I rapporti vengono calcolati soltanto tra osservazioni che condividono anno, territorio e tutte le altre dimensioni. Non vengono combinati percentili riferiti a popolazioni diverse.
+
+Il gender pay gap adjusted non viene stimato dalla pipeline a partire da aggregati pubblici. Viene riportato solo quando una fonte ufficiale pubblica una decomposizione già documentata. Nel caso Eurostat 2025, la componente adjusted/unexplained corregge per caratteristiche osservate nei microdati SES 2022, ma non deve essere letta automaticamente come sola discriminazione perché restano variabili non osservate e segregazioni più fini delle classificazioni disponibili.
 
 ## Qualità e riservatezza
 

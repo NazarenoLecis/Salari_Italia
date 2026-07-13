@@ -1,6 +1,6 @@
 {
-  "started_at": "2026-07-13T13:52:20.780410+00:00",
-  "completed_at": "2026-07-13T13:53:36.023799+00:00",
+  "started_at": "2026-07-13T18:14:54.231101+00:00",
+  "completed_at": "2026-07-13T18:16:09.475533+00:00",
   "geographies": [
     "EU27_2020",
     "AT",
@@ -35,9 +35,10 @@
     "SK",
     "UK"
   ],
-  "successful_requests": 40,
+  "successful_requests": 41,
   "failed_requests": 0,
   "successful_eurostat_requests": 21,
+  "successful_eurostat_publication_requests": 1,
   "successful_istat_requests": 18,
   "successful_oecd_requests": 1,
   "errors": [],
@@ -154,11 +155,11 @@
     }
   ],
   "validation": {
-    "rows": 578977,
+    "rows": 579442,
     "columns": 52,
     "missing_required_columns": [],
     "invalid_value_count": 0,
-    "duplicate_count": 232152,
+    "duplicate_count": 232602,
     "year_min": 2000,
     "year_max": 2025,
     "datasets": [
@@ -197,6 +198,7 @@
       "earn_ses_pub1a",
       "earn_ses_pub1i",
       "earn_ses_pub1s",
+      "eurostat_gpg_decomposition_ses2022",
       "lc_lci_lev"
     ],
     "geographies": [
@@ -419,7 +421,7 @@
     "csv_json_scope": "Estratto Eurostat tracciabile; ISTAT RACLI completo nel payload dashboard compatto e nel Parquet locale."
   },
   "dashboard_validation": {
-    "records": 440073,
+    "records": 440538,
     "filters": [
       "age",
       "citizenship",
@@ -440,7 +442,7 @@
       "working_time",
       "year"
     ],
-    "coverage_items": 10,
+    "coverage_items": 11,
     "valid": true
   }
 }

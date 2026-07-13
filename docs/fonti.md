@@ -22,6 +22,8 @@ La SES è quadriennale e riguarda il perimetro definito nei metadati Eurostat. L
 
 `earn_gr_gpgr2` misura il divario retributivo di genere non corretto. Il dato non controlla per professione, settore, anzianità, istruzione, orario o altre caratteristiche.
 
+La pubblicazione Eurostat `KS-01-25-035`, "Gender pay gaps in the European Union - 2025 edition", integra la decomposizione Blinder-Oaxaca basata su microdati `SES 2022`. La tabella 2 viene acquisita come fonte ufficiale separata per `gender_pay_gap_decomposition` e `gender_pay_gap_adjusted`. L'indicatore adjusted corrisponde alla componente unexplained/residua della decomposizione ed è un benchmark 2022, non una serie annuale.
+
 ### Eurostat labour cost levels
 
 `lc_lci_lev` riporta livelli del costo orario del lavoro. Il costo del lavoro non coincide con la retribuzione lorda ricevuta dal dipendente.

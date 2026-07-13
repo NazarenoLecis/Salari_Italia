@@ -20,6 +20,7 @@ from salari_italia.config import (
 )
 from salari_italia.dashboard import build_dashboard_payload, validate_dashboard_payload
 from salari_italia.eurostat import download_dataset, jsonstat_to_frame, readable_request_url
+from salari_italia.gender_gap import load_gender_pay_gap_decomposition
 from salari_italia.harmonise import harmonise_eurostat
 from salari_italia.indicators import build_percentile_ratios
 from salari_italia.istat import download_istat_csv, download_istat_series, download_istat_structure, harmonise_istat, use_raw_cache
@@ -78,6 +79,20 @@ def run_pipeline(
     errors: list[dict[str, str]] = []
     warnings: list[dict[str, str]] = []
     started_at = datetime.now(UTC).isoformat()
+
+    eurostat_publication_frames: list[pd.DataFrame] = []
+    try:
+        frame = load_gender_pay_gap_decomposition()
+        eurostat_publication_frames.append(frame)
+        frames.append(frame)
+    except Exception as exc:
+        errors.append(
+            {
+                "request": "gender_pay_gap_decomposition_ses2022",
+                "dataset": "eurostat_gpg_decomposition_ses2022",
+                "error": str(exc),
+            }
+        )
 
     for request_config in requests_config:
         name = str(request_config["name"])
@@ -203,7 +218,8 @@ def run_pipeline(
         "geographies": list(selected_geographies),
         "successful_requests": len(frames),
         "failed_requests": len(errors),
-        "successful_eurostat_requests": len(frames) - len(istat_frames) - len(oecd_frames),
+        "successful_eurostat_requests": len(frames) - len(istat_frames) - len(oecd_frames) - len(eurostat_publication_frames),
+        "successful_eurostat_publication_requests": len(eurostat_publication_frames),
         "successful_istat_requests": len(istat_frames),
         "successful_oecd_requests": len(oecd_frames),
         "errors": errors,
