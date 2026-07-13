@@ -19,7 +19,7 @@ from salari_italia.config import (
     requested_geographies,
 )
 from salari_italia.dashboard import build_dashboard_payload, validate_dashboard_payload
-from salari_italia.eurostat import download_dataset, jsonstat_to_frame
+from salari_italia.eurostat import download_dataset, jsonstat_to_frame, readable_request_url
 from salari_italia.harmonise import harmonise_eurostat
 from salari_italia.indicators import build_percentile_ratios
 from salari_italia.istat import download_istat_csv, download_istat_series, download_istat_structure, harmonise_istat, use_raw_cache
@@ -84,12 +84,18 @@ def run_pipeline(
         dataset_id = str(request_config["dataset_id"])
         raw_path = RAW_DIR / f"{name}.json"
         try:
-            payload, source_url = download_dataset(
-                dataset_id=dataset_id,
-                filters=dict(request_config.get("filters", {})),
-                geographies=selected_geographies,
-                raw_output_path=raw_path,
-            )
+            filters = dict(request_config.get("filters", {}))
+            if use_raw_cache() and raw_path.exists():
+                payload = json.loads(raw_path.read_text(encoding="utf-8"))
+                source_url = readable_request_url(dataset_id, filters, selected_geographies)
+                warnings.append({"request": name, "dataset": dataset_id, "warning": "Risposta Eurostat letta dalla cache raw."})
+            else:
+                payload, source_url = download_dataset(
+                    dataset_id=dataset_id,
+                    filters=filters,
+                    geographies=selected_geographies,
+                    raw_output_path=raw_path,
+                )
             raw = jsonstat_to_frame(payload)
             if raw.empty:
                 raise RuntimeError("La risposta non contiene osservazioni.")

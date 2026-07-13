@@ -152,7 +152,13 @@ COVERAGE_ITEMS = [
         "dimension": "Province, paese di nascita, orario, qualifica, giornate retribuite e settori Ateco dettagliati",
         "status": "available",
         "source": "ISTAT RACLI, settore privato",
-        "note": "Disponibile per retribuzioni orarie dei dipendenti del settore privato dal 2014, secondo celle pubblicate. Le giornate retribuite sono classi ufficiali, non conteggi individuali ricostruiti.",
+        "note": "Disponibile per retribuzioni orarie dei dipendenti del settore privato dal 2014, secondo celle pubblicate. Le giornate retribuite sono classi ufficiali, non conteggi individuali ricostruiti. La qualifica separa operai e apprendisti; dirigenti e impiegati sono aggregati quando la fonte li pubblica insieme.",
+    },
+    {
+        "dimension": "Incrocio provincia-settore Ateco",
+        "status": "not_available",
+        "source": "ISTAT RACLI, API pubblica",
+        "note": "I flussi settoriali RACLI integrati pubblicano il dettaglio Ateco per Italia, non per singola provincia. La dashboard non costruisce boxplot provincia-settore senza celle ufficiali.",
     },
     {
         "dimension": "Pubblico/privato, dipendenti/autonomi, cittadinanza",

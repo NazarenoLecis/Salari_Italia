@@ -1,6 +1,6 @@
 {
-  "started_at": "2026-07-12T22:45:05.718825+00:00",
-  "completed_at": "2026-07-12T22:46:13.678841+00:00",
+  "started_at": "2026-07-13T10:33:32.070978+00:00",
+  "completed_at": "2026-07-13T10:34:36.345594+00:00",
   "geographies": [
     "IT",
     "DE",
@@ -16,6 +16,111 @@
   "successful_oecd_requests": 1,
   "errors": [],
   "warnings": [
+    {
+      "request": "ses_hourly_distribution",
+      "dataset": "earn_ses_hourly",
+      "warning": "Risposta Eurostat letta dalla cache raw."
+    },
+    {
+      "request": "ses_monthly_distribution",
+      "dataset": "earn_ses_monthly",
+      "warning": "Risposta Eurostat letta dalla cache raw."
+    },
+    {
+      "request": "ses_annual_distribution",
+      "dataset": "earn_ses_annual",
+      "warning": "Risposta Eurostat letta dalla cache raw."
+    },
+    {
+      "request": "ses_by_age",
+      "dataset": "earn_ses_hourly",
+      "warning": "Risposta Eurostat letta dalla cache raw."
+    },
+    {
+      "request": "ses_by_occupation",
+      "dataset": "earn_ses_hourly",
+      "warning": "Risposta Eurostat letta dalla cache raw."
+    },
+    {
+      "request": "ses_by_sector",
+      "dataset": "earn_ses_hourly",
+      "warning": "Risposta Eurostat letta dalla cache raw."
+    },
+    {
+      "request": "ses_by_working_time",
+      "dataset": "earn_ses_hourly",
+      "warning": "Risposta Eurostat letta dalla cache raw."
+    },
+    {
+      "request": "ses2022_hourly_by_education",
+      "dataset": "earn_ses22_16",
+      "warning": "Risposta Eurostat letta dalla cache raw."
+    },
+    {
+      "request": "ses2022_hourly_by_contract",
+      "dataset": "earn_ses22_15",
+      "warning": "Risposta Eurostat letta dalla cache raw."
+    },
+    {
+      "request": "ses2022_hourly_by_seniority",
+      "dataset": "earn_ses22_17",
+      "warning": "Risposta Eurostat letta dalla cache raw."
+    },
+    {
+      "request": "ses2022_hourly_by_firm_size_occupation",
+      "dataset": "earn_ses22_18",
+      "warning": "Risposta Eurostat letta dalla cache raw."
+    },
+    {
+      "request": "ses2022_monthly_by_education",
+      "dataset": "earn_ses22_23",
+      "warning": "Risposta Eurostat letta dalla cache raw."
+    },
+    {
+      "request": "ses2022_monthly_by_contract",
+      "dataset": "earn_ses22_22",
+      "warning": "Risposta Eurostat letta dalla cache raw."
+    },
+    {
+      "request": "ses2022_annual_by_age_occupation",
+      "dataset": "earn_ses22_28",
+      "warning": "Risposta Eurostat letta dalla cache raw."
+    },
+    {
+      "request": "ses2022_annual_by_education",
+      "dataset": "earn_ses22_30",
+      "warning": "Risposta Eurostat letta dalla cache raw."
+    },
+    {
+      "request": "ses2022_annual_by_contract",
+      "dataset": "earn_ses22_29",
+      "warning": "Risposta Eurostat letta dalla cache raw."
+    },
+    {
+      "request": "low_wage_share",
+      "dataset": "earn_ses_pub1s",
+      "warning": "Risposta Eurostat letta dalla cache raw."
+    },
+    {
+      "request": "low_wage_share_by_age",
+      "dataset": "earn_ses_pub1a",
+      "warning": "Risposta Eurostat letta dalla cache raw."
+    },
+    {
+      "request": "low_wage_share_by_education",
+      "dataset": "earn_ses_pub1i",
+      "warning": "Risposta Eurostat letta dalla cache raw."
+    },
+    {
+      "request": "gender_pay_gap",
+      "dataset": "earn_gr_gpgr2",
+      "warning": "Risposta Eurostat letta dalla cache raw."
+    },
+    {
+      "request": "labour_cost_levels",
+      "dataset": "lc_lci_lev",
+      "warning": "Risposta Eurostat letta dalla cache raw."
+    },
     {
       "request": "istat_structure",
       "dataset": "533_957_DF_DCSC_RACLI_23",
@@ -283,7 +388,7 @@
       "working_time",
       "year"
     ],
-    "coverage_items": 9,
+    "coverage_items": 10,
     "valid": true
   }
 }
