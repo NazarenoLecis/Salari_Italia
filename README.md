@@ -58,8 +58,10 @@ streamlit run dashboard/app.py
 Per modificare i paesi scaricati:
 
 ```bash
-SALARI_GEOGRAPHIES=IT,DE,FR,ES,NL,EU27_2020 python scripts/run_pipeline.py
+SALARI_GEOGRAPHIES=IT,DE,FR,ES,NL,EU27_2020,PL,SE python scripts/run_pipeline.py
 ```
+
+Senza override la pipeline scarica l'aggregato UE27 e un perimetro ampio di paesi europei pubblicati da Eurostat; le celle assenti nella fonte non vengono stimate.
 
 Per ripetere una run locale usando i raw già scaricati:
 

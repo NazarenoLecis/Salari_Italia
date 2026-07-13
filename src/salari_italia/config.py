@@ -10,7 +10,40 @@ INTERMEDIATE_DIR = DATA_DIR / "intermediate"
 PROCESSED_DIR = DATA_DIR / "processed"
 VALIDATION_DIR = DATA_DIR / "validation"
 
-DEFAULT_GEOGRAPHIES = ("IT", "DE", "FR", "ES", "NL", "EU27_2020")
+DEFAULT_GEOGRAPHIES = (
+    "EU27_2020",
+    "AT",
+    "BE",
+    "BG",
+    "CH",
+    "CY",
+    "CZ",
+    "DE",
+    "DK",
+    "EE",
+    "EL",
+    "ES",
+    "FI",
+    "FR",
+    "HR",
+    "HU",
+    "IE",
+    "IS",
+    "IT",
+    "LT",
+    "LU",
+    "LV",
+    "MT",
+    "NL",
+    "NO",
+    "PL",
+    "PT",
+    "RO",
+    "SE",
+    "SI",
+    "SK",
+    "UK",
+)
 
 EUROSTAT_BASE_URL = "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data"
 OECD_BASE_URL = "https://sdmx.oecd.org/public/rest/data"
