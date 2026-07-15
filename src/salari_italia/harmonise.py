@@ -31,7 +31,32 @@ SES_PERIOD_BY_DATASET = {
     "earn_ses22_29": "annual",
     "earn_ses22_30": "annual",
     "earn_ses22_31": "annual",
+    "earn_ses18_15": "hourly",
+    "earn_ses18_16": "hourly",
+    "earn_ses18_17": "hourly",
+    "earn_ses18_18": "hourly",
+    "earn_ses18_22": "monthly",
+    "earn_ses18_23": "monthly",
+    "earn_ses18_28": "annual",
+    "earn_ses18_29": "annual",
+    "earn_ses18_30": "annual",
 }
+
+for _survey_year in ("10", "14"):
+    SES_PERIOD_BY_DATASET.update(
+        {
+            f"earn_ses{_survey_year}_15": "hourly",
+            f"earn_ses{_survey_year}_16": "hourly",
+            f"earn_ses{_survey_year}_17": "hourly",
+            f"earn_ses{_survey_year}_18": "hourly",
+            f"earn_ses{_survey_year}_22": "monthly",
+            f"earn_ses{_survey_year}_23": "monthly",
+            f"earn_ses{_survey_year}_28": "annual",
+            f"earn_ses{_survey_year}_29": "annual",
+            f"earn_ses{_survey_year}_30": "annual",
+            f"earn_ses{_survey_year}_31": "annual",
+        }
+    )
 
 SES2022_MEASURES = {
     "ERN": ("gross_earnings", "mean", None),
@@ -72,18 +97,7 @@ def measure_definition(dataset_id: str, row: pd.Series) -> tuple[str, str, str, 
         percentile = indicator_definition[3]
         pay_period = SES_PERIOD_BY_DATASET[dataset_id]
         return pay_concept, pay_period, statistic, percentile, code
-    if dataset_id in {
-        "earn_ses22_15",
-        "earn_ses22_16",
-        "earn_ses22_17",
-        "earn_ses22_18",
-        "earn_ses22_22",
-        "earn_ses22_23",
-        "earn_ses22_28",
-        "earn_ses22_29",
-        "earn_ses22_30",
-        "earn_ses22_31",
-    }:
+    if dataset_id.startswith(("earn_ses10_", "earn_ses14_", "earn_ses18_", "earn_ses22_")):
         code = str(row_value(row, "indic_se", "unknown"))
         pay_concept, statistic, percentile = SES2022_MEASURES.get(code, ("gross_earnings", "other", None))
         return pay_concept, SES_PERIOD_BY_DATASET[dataset_id], statistic, percentile, code
@@ -93,14 +107,6 @@ def measure_definition(dataset_id: str, row: pd.Series) -> tuple[str, str, str, 
         return "gender_pay_gap_unadjusted", "hourly", "mean_gap", None, "GPG_UNADJUSTED"
     if dataset_id == "lc_lci_lev":
         return "labour_cost", "hourly", "mean", None, str(row_value(row, "lcstruct", "TOTAL_LABOUR_COST"))
-    if dataset_id == "lfsa_ergan":
-        return "labour_market_context", "annual", "employment_rate", None, "EMPLOYMENT_RATE"
-    if dataset_id == "lfsa_argan":
-        return "labour_market_context", "annual", "activity_rate", None, "ACTIVITY_RATE"
-    if dataset_id == "une_rt_a":
-        return "labour_market_context", "annual", "unemployment_rate", None, "UNEMPLOYMENT_RATE"
-    if dataset_id == "lfsa_eppga":
-        return "labour_market_context", "annual", "part_time_share", None, "PART_TIME_SHARE"
     return "unknown", "unknown", "other", None, "unknown"
 
 
@@ -132,8 +138,8 @@ def harmonise_eurostat(
                 "sex_label": row_value(row, "sex_label"),
                 "age_class": row_value(row, "age"),
                 "age_label": row_value(row, "age_label"),
-                "education": row_value(row, "isced11"),
-                "education_label": row_value(row, "isced11_label"),
+                "education": row_value(row, "isced11", row_value(row, "isced97")),
+                "education_label": row_value(row, "isced11_label", row_value(row, "isced97_label")),
                 "occupation": row_value(row, "isco08"),
                 "occupation_label": row_value(row, "isco08_label"),
                 "employment_status": row_value(row, "wstatus"),

@@ -37,7 +37,7 @@
 | `citizenship_label` | Etichetta della cittadinanza. |
 | `country_birth` | Paese o area di nascita, quando pubblicato dalla fonte. |
 | `country_birth_label` | Etichetta del paese o area di nascita. |
-| `pay_concept` | Retribuzione, reddito, imponibile, costo del lavoro o indicatore di contesto del mercato del lavoro. |
+| `pay_concept` | Retribuzione, reddito, imponibile, costo del lavoro o altro concetto economico pubblicato dalla fonte. |
 | `pay_period` | Ora, mese, anno o altro periodo. |
 | `statistic` | Media, mediana, percentile, quota o rapporto. |
 | `percentile` | Percentile numerico quando applicabile. |

@@ -65,6 +65,79 @@ OECD_REQUESTS = (
     },
 )
 
+SES_HISTORICAL_DETAIL_SPECS = (
+    (
+        "hourly_by_education",
+        "16",
+        "Retribuzione oraria lorda media per titolo di studio nella SES {year}.",
+        {"sex": ("T", "M", "F"), "indic_se": "ERN", "sizeclas": "GE10", "nace_r2": "B-S_X_O", "currency": "EUR"},
+    ),
+    (
+        "hourly_by_contract",
+        "15",
+        "Retribuzione oraria lorda media per tipo di contratto nella SES {year}.",
+        {"sex": ("T", "M", "F"), "indic_se": "ERN", "sizeclas": "GE10", "nace_r2": "B-S_X_O", "currency": "EUR"},
+    ),
+    (
+        "hourly_by_seniority",
+        "17",
+        "Retribuzione oraria lorda media per anzianita' lavorativa nella SES {year}.",
+        {"sex": ("T", "M", "F"), "indic_se": "ERN", "sizeclas": "GE10", "nace_r2": "B-S_X_O", "currency": "EUR"},
+    ),
+    (
+        "hourly_by_firm_size_occupation",
+        "18",
+        "Retribuzione oraria lorda media per professione e dimensione d'impresa nella SES {year}.",
+        {"sex": ("T", "M", "F"), "indic_se": "ERN", "currency": "EUR"},
+    ),
+    (
+        "monthly_by_education",
+        "23",
+        "Retribuzione mensile lorda media per titolo di studio nella SES {year}.",
+        {"sex": ("T", "M", "F"), "indic_se": "ERN", "sizeclas": "GE10", "nace_r2": "B-S_X_O", "currency": "EUR"},
+    ),
+    (
+        "monthly_by_contract",
+        "22",
+        "Retribuzione mensile lorda media per tipo di contratto nella SES {year}.",
+        {"sex": ("T", "M", "F"), "indic_se": "ERN", "sizeclas": "GE10", "nace_r2": "B-S_X_O", "currency": "EUR"},
+    ),
+    (
+        "annual_by_age_occupation",
+        "28",
+        "Retribuzione annuale lorda media per eta' e professione nella SES {year}.",
+        {"sex": ("T", "M", "F"), "indic_se": "ERN", "sizeclas": "GE10", "currency": "EUR"},
+    ),
+    (
+        "annual_by_education",
+        "30",
+        "Retribuzione annuale lorda media per titolo di studio nella SES {year}.",
+        {"sex": ("T", "M", "F"), "indic_se": "ERN", "sizeclas": "GE10", "nace_r2": "B-S_X_O", "currency": "EUR"},
+    ),
+    (
+        "annual_by_contract",
+        "29",
+        "Retribuzione annuale lorda media per tipo di contratto nella SES {year}.",
+        {"sex": ("T", "M", "F"), "indic_se": "ERN", "sizeclas": "GE10", "nace_r2": "B-S_X_O", "currency": "EUR"},
+    ),
+)
+
+
+def historical_ses_detail_requests() -> tuple[dict, ...]:
+    requests = []
+    for year in ("2010", "2014"):
+        suffix_year = year[2:]
+        for name_suffix, dataset_suffix, description, filters in SES_HISTORICAL_DETAIL_SPECS:
+            requests.append(
+                {
+                    "name": f"ses{year}_{name_suffix}",
+                    "dataset_id": f"earn_ses{suffix_year}_{dataset_suffix}",
+                    "description": description.format(year=year),
+                    "filters": dict(filters),
+                }
+            )
+    return tuple(requests)
+
 EUROSTAT_REQUESTS = (
     {
         "name": "ses_hourly_distribution",
@@ -214,6 +287,60 @@ EUROSTAT_REQUESTS = (
         "filters": {"sex": ("T", "M", "F"), "indic_se": "ERN", "sizeclas": "GE10", "nace_r2": "B-S_X_O", "unit": "EUR"},
     },
     {
+        "name": "ses2018_hourly_by_education",
+        "dataset_id": "earn_ses18_16",
+        "description": "Retribuzione oraria lorda media per titolo di studio nella SES 2018.",
+        "filters": {"sex": ("T", "M", "F"), "indic_se": "ERN", "sizeclas": "GE10", "nace_r2": "B-S_X_O", "unit": "EUR"},
+    },
+    {
+        "name": "ses2018_hourly_by_contract",
+        "dataset_id": "earn_ses18_15",
+        "description": "Retribuzione oraria lorda media per tipo di contratto nella SES 2018.",
+        "filters": {"sex": ("T", "M", "F"), "indic_se": "ERN", "sizeclas": "GE10", "nace_r2": "B-S_X_O", "unit": "EUR"},
+    },
+    {
+        "name": "ses2018_hourly_by_seniority",
+        "dataset_id": "earn_ses18_17",
+        "description": "Retribuzione oraria lorda media per anzianita' lavorativa nella SES 2018.",
+        "filters": {"sex": ("T", "M", "F"), "indic_se": "ERN", "sizeclas": "GE10", "nace_r2": "B-S_X_O", "unit": "EUR"},
+    },
+    {
+        "name": "ses2018_hourly_by_firm_size_occupation",
+        "dataset_id": "earn_ses18_18",
+        "description": "Retribuzione oraria lorda media per professione e dimensione d'impresa nella SES 2018.",
+        "filters": {"sex": ("T", "M", "F"), "indic_se": "ERN", "unit": "EUR"},
+    },
+    {
+        "name": "ses2018_monthly_by_education",
+        "dataset_id": "earn_ses18_23",
+        "description": "Retribuzione mensile lorda media per titolo di studio nella SES 2018.",
+        "filters": {"sex": ("T", "M", "F"), "indic_se": "ERN", "sizeclas": "GE10", "nace_r2": "B-S_X_O", "unit": "EUR"},
+    },
+    {
+        "name": "ses2018_monthly_by_contract",
+        "dataset_id": "earn_ses18_22",
+        "description": "Retribuzione mensile lorda media per tipo di contratto nella SES 2018.",
+        "filters": {"sex": ("T", "M", "F"), "indic_se": "ERN", "sizeclas": "GE10", "nace_r2": "B-S_X_O", "unit": "EUR"},
+    },
+    {
+        "name": "ses2018_annual_by_age_occupation",
+        "dataset_id": "earn_ses18_28",
+        "description": "Retribuzione annuale lorda media per eta' e professione nella SES 2018.",
+        "filters": {"sex": ("T", "M", "F"), "indic_se": "ERN", "sizeclas": "GE10", "unit": "EUR"},
+    },
+    {
+        "name": "ses2018_annual_by_education",
+        "dataset_id": "earn_ses18_30",
+        "description": "Retribuzione annuale lorda media per titolo di studio nella SES 2018.",
+        "filters": {"sex": ("T", "M", "F"), "indic_se": "ERN", "sizeclas": "GE10", "nace_r2": "B-S_X_O", "unit": "EUR"},
+    },
+    {
+        "name": "ses2018_annual_by_contract",
+        "dataset_id": "earn_ses18_29",
+        "description": "Retribuzione annuale lorda media per tipo di contratto nella SES 2018.",
+        "filters": {"sex": ("T", "M", "F"), "indic_se": "ERN", "sizeclas": "GE10", "nace_r2": "B-S_X_O", "unit": "EUR"},
+    },
+    {
         "name": "low_wage_share",
         "dataset_id": "earn_ses_pub1s",
         "description": "Quota di dipendenti sotto due terzi della mediana nazionale.",
@@ -247,49 +374,7 @@ EUROSTAT_REQUESTS = (
             "nace_r2": ("B-S_X_O", "C", "F", "G-J", "K-N"),
         },
     },
-    {
-        "name": "lfs_employment_rate",
-        "dataset_id": "lfsa_ergan",
-        "description": "Tasso di occupazione annuale LFS per sesso, eta' 20-64 e cittadinanza totale.",
-        "filters": {
-            "unit": "PC",
-            "age": "Y20-64",
-            "citizen": "TOTAL",
-            "sex": ("T", "M", "F"),
-        },
-    },
-    {
-        "name": "lfs_activity_rate",
-        "dataset_id": "lfsa_argan",
-        "description": "Tasso di partecipazione alla forza lavoro annuale LFS per sesso, eta' 20-64 e cittadinanza totale.",
-        "filters": {
-            "unit": "PC",
-            "age": "Y20-64",
-            "citizen": "TOTAL",
-            "sex": ("T", "M", "F"),
-        },
-    },
-    {
-        "name": "lfs_unemployment_rate",
-        "dataset_id": "une_rt_a",
-        "description": "Tasso di disoccupazione annuale LFS per sesso, eta' 15-74.",
-        "filters": {
-            "unit": "PC_ACT",
-            "age": "Y15-74",
-            "sex": ("T", "M", "F"),
-        },
-    },
-    {
-        "name": "lfs_part_time_share",
-        "dataset_id": "lfsa_eppga",
-        "description": "Quota di occupati part-time sul totale occupati LFS per sesso, eta' 15-64.",
-        "filters": {
-            "unit": "PC",
-            "age": "Y15-64",
-            "sex": ("T", "M", "F"),
-        },
-    },
-)
+) + historical_ses_detail_requests()
 
 ISTAT_STRUCTURE_FLOW_ID = "533_957_DF_DCSC_RACLI_23"
 ISTAT_WAGE_DATA_TYPES = (

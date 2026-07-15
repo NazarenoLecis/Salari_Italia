@@ -8,7 +8,7 @@
 
 `earn_ses_monthly` e `earn_ses_annual` aggiungono gli stessi indicatori distributivi per retribuzioni mensili e annuali lorde. Non vengono convertite tra loro: ogni periodo retributivo resta una misura distinta. Per queste due tavole la pipeline acquisisce anche le categorie di orario `TOTAL`, `FT`, `PT`, `TOT_FTE` e `PT_FTE` quando pubblicate, cosi' la dashboard puo' distinguere i totali grezzi dai valori in equivalenti full-time.
 
-Le tavole `earn_ses22_15`, `earn_ses22_16`, `earn_ses22_17`, `earn_ses22_18`, `earn_ses22_22`, `earn_ses22_23`, `earn_ses22_28`, `earn_ses22_29` e `earn_ses22_30` coprono l'edizione 2022 della SES e sono usate per contratto, istruzione, anzianità lavorativa, dimensione d'impresa, professione, età e settore. Sono trattate come punti 2022, non come serie storiche.
+Le tavole di dettaglio `earn_ses10_*`, `earn_ses14_*`, `earn_ses18_*` e `earn_ses22_*` integrate coprono le edizioni 2010, 2014, 2018 e 2022 della SES e sono usate per contratto, istruzione, anzianità lavorativa, dimensione d'impresa, professione, età e settore. Sono trattate come punti delle rispettive edizioni, non come serie annuali interpolate.
 
 La SES è quadriennale e riguarda il perimetro definito nei metadati Eurostat. La copertura non coincide necessariamente con l'intera occupazione e può escludere imprese molto piccole o specifici settori.
 
@@ -31,12 +31,6 @@ La pubblicazione Eurostat `KS-01-25-035`, "Gender pay gaps in the European Union
 ### OECD average annual wages
 
 `DSD_EARNINGS@AV_AN_WAGE` misura il salario medio annuo per dipendente equivalente full-time nell'economia totale. La pipeline acquisisce la serie in `EUR` a prezzi costanti/base 2025 quando la fonte la pubblica; non converte autonomamente i paesi non-euro da valute nazionali o dollari PPP.
-
-### Eurostat Labour Force Survey
-
-Le tavole LFS `lfsa_ergan`, `lfsa_argan`, `une_rt_a` e `lfsa_eppga` sono integrate come indicatori annuali di contesto: tasso di occupazione 20-64, tasso di attivita' 20-64, tasso di disoccupazione 15-74 e quota di occupati part-time 15-64.
-
-Queste serie servono per controllare composizione e dinamica del mercato del lavoro quando una serie salariale sembra anomala. Non sono filtri della SES e non devono essere fuse con le celle retributive: hanno fonte, popolazione e definizioni proprie.
 
 ### ISTAT
 

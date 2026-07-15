@@ -177,25 +177,6 @@ DASHBOARD_GUIDANCE = [
         ),
         "recommended_cross_checks": [],
     },
-    {
-        "id": "labour_market_context_is_lfs",
-        "severity": "info",
-        "title": "Indicatori occupazionali: fonte e perimetro diversi",
-        "applies_to": {
-            "pay_concept": ["labour_market_context"],
-        },
-        "message": (
-            "Occupazione, attivita', disoccupazione e quota part-time arrivano dalla Labour Force Survey. "
-            "Servono come controllo di contesto e non sono celle della Structure of Earnings Survey."
-        ),
-        "recommended_cross_checks": [
-            {
-                "dimension": "statistic",
-                "values": ["employment_rate", "activity_rate", "unemployment_rate", "part_time_share"],
-                "label": "Affianca indicatori LFS a sesso e paese selezionati nelle serie salariali.",
-            }
-        ],
-    },
 ]
 
 COVERAGE_ITEMS = [
@@ -224,8 +205,8 @@ COVERAGE_ITEMS = [
     {
         "dimension": "Titolo di studio, contratto, anzianita', dimensione impresa",
         "status": "partial",
-        "source": "ISTAT RACLI; Eurostat Structure of Earnings Survey 2022",
-        "note": "Titolo di studio, contratto e dimensione d'impresa sono integrati per la retribuzione oraria privata ISTAT; l'anzianita' resta solo nelle tavole SES 2022 quando pubblicata.",
+        "source": "ISTAT RACLI; Eurostat Structure of Earnings Survey 2010, 2014, 2018 e 2022",
+        "note": "Titolo di studio, contratto e dimensione d'impresa sono integrati per la retribuzione oraria privata ISTAT; il dettaglio europeo SES e' disponibile per le edizioni quadriennali 2010-2022 quando pubblicato.",
     },
     {
         "dimension": "Regione, provincia, citta' o comune",
@@ -268,15 +249,6 @@ COVERAGE_ITEMS = [
         "status": "available_separate",
         "source": "Eurostat lc_lci_lev",
         "note": "Mantenuto separato dalla retribuzione ricevuta dal lavoratore.",
-    },
-    {
-        "dimension": "Occupazione, attivita', disoccupazione e quota part-time",
-        "status": "available_separate",
-        "source": "Eurostat Labour Force Survey",
-        "note": (
-            "Integrati come indicatori annuali di contesto per paese e sesso: tasso di occupazione 20-64, "
-            "partecipazione 20-64, disoccupazione 15-74 e quota part-time 15-64. Non sono filtri della SES."
-        ),
     },
 ]
 
