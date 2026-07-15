@@ -24,7 +24,7 @@
 | `contract_type` | Tipo o durata del rapporto di lavoro. |
 | `collective_pay_agreement` | Livello o tipo di accordo retributivo, quando la fonte lo pubblica. |
 | `collective_pay_agreement_label` | Etichetta dell'accordo retributivo. |
-| `working_time` | Tempo pieno, parziale o totale. |
+| `working_time` | Tempo pieno, parziale, totale o totale in equivalenti full-time secondo i codici della fonte (`FT`, `PT`, `TOTAL`, `TOT_FTE`, `PT_FTE`). |
 | `working_time_label` | Etichetta del regime di orario. |
 | `seniority` | Classe di anzianità lavorativa o di servizio. |
 | `seniority_label` | Etichetta della classe di anzianità. |

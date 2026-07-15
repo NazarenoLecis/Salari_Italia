@@ -6,7 +6,7 @@
 
 `earn_ses_hourly` contiene statistiche sulle retribuzioni orarie lorde. La pipeline acquisisce media, D1, mediana e D9 per il totale e media/mediana per sesso, età, professione, settore e regime di orario quando le celle sono pubblicate.
 
-`earn_ses_monthly` e `earn_ses_annual` aggiungono gli stessi indicatori distributivi per retribuzioni mensili e annuali lorde. Non vengono convertite tra loro: ogni periodo retributivo resta una misura distinta.
+`earn_ses_monthly` e `earn_ses_annual` aggiungono gli stessi indicatori distributivi per retribuzioni mensili e annuali lorde. Non vengono convertite tra loro: ogni periodo retributivo resta una misura distinta. Per queste due tavole la pipeline acquisisce anche le categorie di orario `TOTAL`, `FT`, `PT`, `TOT_FTE` e `PT_FTE` quando pubblicate, cosi' la dashboard puo' distinguere i totali grezzi dai valori in equivalenti full-time.
 
 Le tavole `earn_ses22_15`, `earn_ses22_16`, `earn_ses22_17`, `earn_ses22_18`, `earn_ses22_22`, `earn_ses22_23`, `earn_ses22_28`, `earn_ses22_29` e `earn_ses22_30` coprono l'edizione 2022 della SES e sono usate per contratto, istruzione, anzianità lavorativa, dimensione d'impresa, professione, età e settore. Sono trattate come punti 2022, non come serie storiche.
 

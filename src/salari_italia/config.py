@@ -82,11 +82,14 @@ EUROSTAT_REQUESTS = (
     {
         "name": "ses_monthly_distribution",
         "dataset_id": "earn_ses_monthly",
-        "description": "Media, decile 1, mediana e decile 9 delle retribuzioni mensili lorde per sesso.",
+        "description": (
+            "Media, decile 1, mediana e decile 9 delle retribuzioni mensili lorde "
+            "per sesso e regime di orario."
+        ),
         "filters": {
             "nace_r2": "B-S_X_O",
             "isco08": "TOTAL",
-            "worktime": "TOTAL",
+            "worktime": ("TOTAL", "TOT_FTE", "FT", "PT", "PT_FTE"),
             "age": "TOTAL",
             "sex": ("T", "M", "F"),
             "indic_se": ("D1_E_EUR", "MED_E_EUR", "D9_E_EUR", "MEAN_E_EUR"),
@@ -95,11 +98,14 @@ EUROSTAT_REQUESTS = (
     {
         "name": "ses_annual_distribution",
         "dataset_id": "earn_ses_annual",
-        "description": "Media, decile 1, mediana e decile 9 delle retribuzioni annuali lorde per sesso.",
+        "description": (
+            "Media, decile 1, mediana e decile 9 delle retribuzioni annuali lorde "
+            "per sesso e regime di orario."
+        ),
         "filters": {
             "nace_r2": "B-S_X_O",
             "isco08": "TOTAL",
-            "worktime": "TOTAL",
+            "worktime": ("TOTAL", "TOT_FTE", "FT", "PT", "PT_FTE"),
             "age": "TOTAL",
             "sex": ("T", "M", "F"),
             "indic_se": ("D1_E_EUR", "MED_E_EUR", "D9_E_EUR", "MEAN_E_EUR"),

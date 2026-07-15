@@ -19,6 +19,8 @@ Ogni osservazione specifica `pay_concept` e `pay_period`.
 
 Retribuzione mensile e annuale incorporano anche differenze nelle ore, nei mesi lavorati e nella continuità occupazionale. La retribuzione oraria misura un oggetto diverso e viene mantenuta separata.
 
+Nelle tavole Eurostat SES mensili e annuali il codice `working_time` deve essere letto esplicitamente. `TOTAL` combina lavoratori a tempo pieno e part-time; `FT` e `PT` separano i due gruppi; `TOT_FTE` e `PT_FTE` riportano grandezze in equivalenti full-time quando pubblicate. Per confronti di livelli annuali tra paesi o nel tempo, `TOT_FTE` o `FT` sono generalmente piu' interpretabili del solo `TOTAL`.
+
 ## Territorio
 
 `geography_basis` identifica il significato geografico del dato.

@@ -32,3 +32,7 @@ def test_build_data_export_payload() -> None:
     assert payload["records"][0][value_index] == 15.4
     assert payload["filters"]["year"][0]["value"] == 2022
     assert payload["coverage"]
+    guidance = payload["dashboard_guidance"]
+    annual_note = next(item for item in guidance if item["id"] == "annual_total_vs_fte")
+    assert annual_note["applies_to"]["working_time"] == ["TOTAL"]
+    assert "TOT_FTE" in annual_note["recommended_cross_checks"][0]["values"]

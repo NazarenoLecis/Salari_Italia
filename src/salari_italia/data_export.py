@@ -120,12 +120,75 @@ FILTER_DIMENSIONS = [
     {"id": "statistic", "field": "statistic", "label": "Statistica"},
 ]
 
+DASHBOARD_GUIDANCE = [
+    {
+        "id": "annual_total_vs_fte",
+        "severity": "warning",
+        "title": "Retribuzione annuale: controllare il regime di orario",
+        "applies_to": {
+            "dataset": ["earn_ses_annual"],
+            "pay_period": ["annual"],
+            "working_time": ["TOTAL"],
+        },
+        "message": (
+            "Nella SES Eurostat, il totale annuale con worktime=TOTAL combina tempo pieno e part-time. "
+            "Per confronti salariali tra paesi o nel tempo e' consigliato affiancare TOT_FTE e FT."
+        ),
+        "recommended_cross_checks": [
+            {
+                "dimension": "working_time",
+                "values": ["TOT_FTE", "FT", "PT", "PT_FTE"],
+                "label": "Confronta totale, full-time, part-time e totale in equivalenti full-time.",
+            }
+        ],
+    },
+    {
+        "id": "monthly_annual_are_distinct_measures",
+        "severity": "info",
+        "title": "Orario, mensile e annuale misurano oggetti diversi",
+        "applies_to": {
+            "dataset": ["earn_ses_hourly", "earn_ses_monthly", "earn_ses_annual"],
+            "pay_period": ["hourly", "monthly", "annual"],
+        },
+        "message": (
+            "Le retribuzioni mensili e annuali Eurostat non sono conversioni della paga oraria. "
+            "Incorporano composizione dell'orario, pagamenti non standard e periodo lavorato secondo "
+            "le definizioni SES."
+        ),
+        "recommended_cross_checks": [
+            {
+                "dimension": "pay_period",
+                "values": ["hourly", "monthly", "annual"],
+                "label": "Mostra orario, mensile e annuale insieme quando il segnale sembra divergente.",
+            }
+        ],
+    },
+    {
+        "id": "ses_four_year_survey",
+        "severity": "info",
+        "title": "La SES e' quadriennale",
+        "applies_to": {
+            "source": ["Eurostat"],
+            "dataset": ["earn_ses_hourly", "earn_ses_monthly", "earn_ses_annual"],
+        },
+        "message": (
+            "La Structure of Earnings Survey e' disponibile per anni di riferimento quadriennali. "
+            "Le linee tra i punti non devono essere lette come variazioni annuali osservate."
+        ),
+        "recommended_cross_checks": [],
+    },
+]
+
 COVERAGE_ITEMS = [
     {
         "dimension": "Media, mediana, D1, D9 e rapporti D9/D1",
         "status": "available",
         "source": "ISTAT RACLI; Eurostat SES",
-        "note": "ISTAT RACLI copre la retribuzione oraria lorda privata dal 2014; Eurostat aggiunge mensile e annuale armonizzati.",
+        "note": (
+            "ISTAT RACLI copre la retribuzione oraria lorda privata dal 2014; Eurostat aggiunge mensile "
+            "e annuale armonizzati. Per mensile e annuale SES sono disponibili totale, full-time, part-time "
+            "e categorie in equivalenti full-time quando pubblicate."
+        ),
     },
     {
         "dimension": "Distribuzione complessiva dei salari",
@@ -354,6 +417,7 @@ def build_data_export_payload(
         "ranges": available_ranges(standard),
         "filters": build_filter_options(standard),
         "coverage": COVERAGE_ITEMS,
+        "dashboard_guidance": DASHBOARD_GUIDANCE,
         "sources": source_catalog(geographies),
         "record_schema": COMPACT_RECORD_FIELDS,
         "records": record_payload(standard),
