@@ -52,10 +52,10 @@ OECD_REQUESTS = (
     {
         "name": "oecd_average_annual_wages",
         "dataset_id": "OECD.ELS.SAE,DSD_EARNINGS@AV_AN_WAGE",
-        "description": "Salario medio annuo per dipendente equivalente full-time nell'economia totale, dollari PPP.",
+        "description": "Salario medio annuo per dipendente equivalente full-time nell'economia totale, euro a prezzi 2025 dove pubblicati.",
         "filters": {
             "MEASURE": "WG",
-            "UNIT_MEASURE": "USD_PPP",
+            "UNIT_MEASURE": "EUR",
             "PAY_PERIOD": "A",
             "PRICE_BASE": "Q",
             "AGGREGATION_OPERATION": "MEAN",
@@ -245,6 +245,48 @@ EUROSTAT_REQUESTS = (
             "unit": "EUR",
             "lcstruct": "D1_D4_MD5",
             "nace_r2": ("B-S_X_O", "C", "F", "G-J", "K-N"),
+        },
+    },
+    {
+        "name": "lfs_employment_rate",
+        "dataset_id": "lfsa_ergan",
+        "description": "Tasso di occupazione annuale LFS per sesso, eta' 20-64 e cittadinanza totale.",
+        "filters": {
+            "unit": "PC",
+            "age": "Y20-64",
+            "citizen": "TOTAL",
+            "sex": ("T", "M", "F"),
+        },
+    },
+    {
+        "name": "lfs_activity_rate",
+        "dataset_id": "lfsa_argan",
+        "description": "Tasso di partecipazione alla forza lavoro annuale LFS per sesso, eta' 20-64 e cittadinanza totale.",
+        "filters": {
+            "unit": "PC",
+            "age": "Y20-64",
+            "citizen": "TOTAL",
+            "sex": ("T", "M", "F"),
+        },
+    },
+    {
+        "name": "lfs_unemployment_rate",
+        "dataset_id": "une_rt_a",
+        "description": "Tasso di disoccupazione annuale LFS per sesso, eta' 15-74.",
+        "filters": {
+            "unit": "PC_ACT",
+            "age": "Y15-74",
+            "sex": ("T", "M", "F"),
+        },
+    },
+    {
+        "name": "lfs_part_time_share",
+        "dataset_id": "lfsa_eppga",
+        "description": "Quota di occupati part-time sul totale occupati LFS per sesso, eta' 15-64.",
+        "filters": {
+            "unit": "PC",
+            "age": "Y15-64",
+            "sex": ("T", "M", "F"),
         },
     },
 )

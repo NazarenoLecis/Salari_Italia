@@ -16,10 +16,13 @@ Ogni osservazione specifica `pay_concept` e `pay_period`.
 - `gender_pay_gap_unadjusted` indica la differenza percentuale non corretta tra le retribuzioni orarie medie di uomini e donne.
 - `gender_pay_gap_adjusted` indica la componente unexplained della decomposizione Blinder-Oaxaca Eurostat su SES 2022.
 - `gender_pay_gap_decomposition` contiene le componenti della stessa decomposizione: parte spiegata complessiva e contributi di età, istruzione, occupazione, anzianità, contratto, orario, settore, dimensione, controllo dell'impresa e localizzazione.
+- `labour_market_context` raccoglie indicatori LFS annuali di contesto, non retributivi: occupazione, attivita', disoccupazione e quota part-time.
 
 Retribuzione mensile e annuale incorporano anche differenze nelle ore, nei mesi lavorati e nella continuità occupazionale. La retribuzione oraria misura un oggetto diverso e viene mantenuta separata.
 
 Nelle tavole Eurostat SES mensili e annuali il codice `working_time` deve essere letto esplicitamente. `TOTAL` combina lavoratori a tempo pieno e part-time; `FT` e `PT` separano i due gruppi; `TOT_FTE` e `PT_FTE` riportano grandezze in equivalenti full-time quando pubblicate. Per confronti di livelli annuali tra paesi o nel tempo, `TOT_FTE` o `FT` sono generalmente piu' interpretabili del solo `TOTAL`.
+
+Gli indicatori LFS vengono affiancati alla lettura salariale per verificare se variazioni anomale sono coerenti con occupazione, partecipazione, disoccupazione o quota part-time. Restano pero' serie separate: non hanno lo stesso universo della SES e non modificano le statistiche retributive.
 
 ## Territorio
 

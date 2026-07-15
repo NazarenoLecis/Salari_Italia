@@ -28,6 +28,16 @@ La pubblicazione Eurostat `KS-01-25-035`, "Gender pay gaps in the European Union
 
 `lc_lci_lev` riporta livelli del costo orario del lavoro. Il costo del lavoro non coincide con la retribuzione lorda ricevuta dal dipendente.
 
+### OECD average annual wages
+
+`DSD_EARNINGS@AV_AN_WAGE` misura il salario medio annuo per dipendente equivalente full-time nell'economia totale. La pipeline acquisisce la serie in `EUR` a prezzi costanti/base 2025 quando la fonte la pubblica; non converte autonomamente i paesi non-euro da valute nazionali o dollari PPP.
+
+### Eurostat Labour Force Survey
+
+Le tavole LFS `lfsa_ergan`, `lfsa_argan`, `une_rt_a` e `lfsa_eppga` sono integrate come indicatori annuali di contesto: tasso di occupazione 20-64, tasso di attivita' 20-64, tasso di disoccupazione 15-74 e quota di occupati part-time 15-64.
+
+Queste serie servono per controllare composizione e dinamica del mercato del lavoro quando una serie salariale sembra anomala. Non sono filtri della SES e non devono essere fuse con le celle retributive: hanno fonte, popolazione e definizioni proprie.
+
 ### ISTAT
 
 La pipeline integra ISTAT RACLI, famiglia `533_957`, "Retribuzioni orarie dei dipendenti del settore privato". I dataflow `533_957_DF_DCSC_RACLI_8`-`24` sono usati per dettaglio territoriale provinciale e settori Ateco a due cifre.

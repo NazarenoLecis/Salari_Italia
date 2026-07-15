@@ -93,6 +93,14 @@ def measure_definition(dataset_id: str, row: pd.Series) -> tuple[str, str, str, 
         return "gender_pay_gap_unadjusted", "hourly", "mean_gap", None, "GPG_UNADJUSTED"
     if dataset_id == "lc_lci_lev":
         return "labour_cost", "hourly", "mean", None, str(row_value(row, "lcstruct", "TOTAL_LABOUR_COST"))
+    if dataset_id == "lfsa_ergan":
+        return "labour_market_context", "annual", "employment_rate", None, "EMPLOYMENT_RATE"
+    if dataset_id == "lfsa_argan":
+        return "labour_market_context", "annual", "activity_rate", None, "ACTIVITY_RATE"
+    if dataset_id == "une_rt_a":
+        return "labour_market_context", "annual", "unemployment_rate", None, "UNEMPLOYMENT_RATE"
+    if dataset_id == "lfsa_eppga":
+        return "labour_market_context", "annual", "part_time_share", None, "PART_TIME_SHARE"
     return "unknown", "unknown", "other", None, "unknown"
 
 

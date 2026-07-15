@@ -94,9 +94,11 @@ def harmonise_oecd_average_wages(raw: pd.DataFrame, request_name: str, source_ur
     for row in raw.to_dict(orient="records"):
         if row_value(row, "MEASURE") != "WG":
             continue
-        if row_value(row, "UNIT_MEASURE") != "USD_PPP":
+        if row_value(row, "UNIT_MEASURE") != "EUR":
             continue
         if row_value(row, "PAY_PERIOD") != "A":
+            continue
+        if row_value(row, "PRICE_BASE") != "Q":
             continue
         if row_value(row, "AGGREGATION_OPERATION") != "MEAN":
             continue
@@ -128,8 +130,8 @@ def harmonise_oecd_average_wages(raw: pd.DataFrame, request_name: str, source_ur
                 "percentile": None,
                 "measure_code": row_value(row, "MEASURE"),
                 "value": value,
-                "unit": "USD_PPP",
-                "unit_label": "Dollari USA PPP 2025",
+                "unit": "EUR",
+                "unit_label": f"Euro a prezzi {row_value(row, 'BASE_PER') or '2025'}",
                 "quality_flag": row_value(row, "OBS_STATUS"),
                 "source_url": source_url,
             }

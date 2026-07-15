@@ -36,3 +36,6 @@ def test_build_data_export_payload() -> None:
     annual_note = next(item for item in guidance if item["id"] == "annual_total_vs_fte")
     assert annual_note["applies_to"]["working_time"] == ["TOTAL"]
     assert "TOT_FTE" in annual_note["recommended_cross_checks"][0]["values"]
+    lfs_note = next(item for item in guidance if item["id"] == "labour_market_context_is_lfs")
+    assert lfs_note["applies_to"]["pay_concept"] == ["labour_market_context"]
+    assert "part_time_share" in lfs_note["recommended_cross_checks"][0]["values"]
